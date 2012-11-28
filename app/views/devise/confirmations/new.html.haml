@@ -1,0 +1,10 @@
+.grid.col-one-half.mq2-col-full
+  %h2
+    = t("resend_confirmation_instructions")
+  = form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+    = devise_error_messages!
+    %div
+      = f.label :email
+      = f.email_field :email, :placeholder => "JohnDoe@gmail.com", :required => "", :class => "required email"
+    %div= f.submit
+  = render "devise/shared/links"

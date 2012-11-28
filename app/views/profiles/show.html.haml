@@ -1,0 +1,14 @@
+%p
+  %b= t("editing.min_pace")
+  = @profile.min_avg
+%p
+  %b= t("editing.max_pace")
+  = @profile.max_avg
+%p
+  %b= t("editing.max_distance")
+  = @profile.distance
+
+
+= link_to t("edit"), edit_profile_path(@profile)
+\|
+= link_to t("back"), profiles_path

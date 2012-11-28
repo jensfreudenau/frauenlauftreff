@@ -1,0 +1,17 @@
+%h1= t('profile')
+
+%table
+  %tr
+    %th= t('editing.max_distance')
+    %th= t('editing.max_pace')
+    %th= t('editing.min_pace')
+    %th= t('editing.description')
+    %th= link_to t("edit"), edit_profile_path(@profiles.first)
+  - @profiles.each do |profile|
+
+    %tr
+      %td= profile.distance
+      %td= profile.max_avg
+      %td= profile.min_avg
+      %td= profile.description
+

@@ -1,0 +1,277 @@
+de:
+  errors:
+    messages:
+      not_found: "Nicht gefunden"
+      already_confirmed: "ist bereits bestätigt"
+      not_locked: "war nicht gesperrt"
+
+  devise:
+    failure:
+      unauthenticated: 'Du musst dich zuerst anmelden.'
+      unconfirmed: 'Du musst deinen Acoount zuerst bestätigen.'
+      locked: 'Dein Account ist gesperrt.'
+      invalid: 'Falscher Benutzername oder falsches Passwort.'
+      invalid_token: 'Ungültiger Schlüssel.'
+      timeout: 'Die Sitzung ist abgelaufen, bitte melde dich erneut an.'
+      inactive: 'Dein Account ist noch nicht aktiviert.'
+    sessions:
+      signed_in: 'Erfolgreich Angemeldet.'
+      signed_out: 'Erfolgreich Abgemeldet.'
+    passwords:
+      send_instructions: 'Du wirst in Kürze eine E-Mail erhalten, in der dir erklärt wird, wie du dein Passwort zurücksetzt.'
+      updated: 'Dein Passwort wurde erfolreich geändert. Du bist nun angemeldet.'
+    confirmations:
+      send_instructions: 'Du wirst in Kürze eine E-Mail erhalten mit deren Hilfe du deinen Account bestätigen kannst.'
+      confirmed: 'Dein Acoount wurde erfolgreich bestätigt. Du bist nun angemeldet.'
+    registrations:
+      signed_up: 'Der Benutzer wurde erfolreich angelegt. Falls das Bestätigungsmodul eingeschaltet ist, wird nun eine Bestätigungsmail versand.'
+      updated: 'You updated your account successfully.'
+      destroyed: 'Der Benutzer wurde erfolgreich gelöscht.'
+    unlocks:
+
+      send_instructions: 'Du wirst in Kürze eine E-Mail mit den Anweisungen zum Entsperren des Accounts erhalten.'
+      unlocked: 'Dein Acoount wurde erfolgreich entsperrt. Du bist nun angemeldet'
+    mailer:
+      confirmation_instructions:
+        subject: 'Anweisungen zur Bestätigung'
+      reset_password_instructions:
+        subject: 'Anweisungen zur Passwortwiederherstellung'
+      subject: 'Anweisungen zum entsperren'
+  resend_unlock_instructions: "neu senden Anleitung"
+  sign_up: "registriere dich"
+  sign_in: "einloggen"
+  forgot_your_password: "Passwort vergessen?"
+  resend_confirmation_instructions: "Noch mal die Bestätigung schicken"
+  at: "am"
+  blogentries: "Blog"
+  comment: "Kommentar"
+  courses: "Routen"
+  course names: "Strecken"
+  Download: "Download"
+  fullscreen: "Fullscreen"
+  heartrate: "Herzfrequenz"
+  height: "Höhenmeter"
+  home: "Home"
+  laps: "Runden"
+  lap: "Runde"
+  last_trainings: "Letzte Trainings"
+  numb: "Nr"
+  sportlevels: "Intensität"
+  sports: "Sportarten"
+  sport: "Sportart"
+  statistics: "Statistik"
+  trainings: "Training"
+  map: "Karte"
+  create trainings route: "Trainingsroute anlegen"
+  editing:
+    profile: "Profil bearbeiten"
+    max_distance: "max. Lauflänge"
+    min_pace: "min. Geschwindigkeit"
+    max_pace: "max. Geschwindigkeit"
+    description: "Beschreibung"
+    save: "speichern"
+  courses: "Strecken"
+  delete: "löschen"
+  show: "anzeigen"
+  edit: "bearbeiten"
+  back: "zurück"
+  list: "Alle"
+  new: "Neu"
+  profile: "Profil"
+  all_courses: "Alle Strecken"
+  all_trainings: "Training"
+  statistics: "Statistik"
+  save: "Speichern"
+  new_training: "Neues Training"
+  date:
+    calendar:
+      calendar_class: my_cool_calendar
+    formats:
+      default: "%d.%m.%Y"
+      short: "%e. %b"
+      long: "%e. %B %Y"
+      only_day: "%e"
+      calendar: "%B %Y"
+    day_names: [Sonntag, Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag]
+    abbr_day_names: [So, Mo, Di, Mi, Do, Fr, Sa]
+    calendar_days: [Mo, Di, Mi, Do, Fr, Sa, So]
+    month_names: [~, Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember]
+    abbr_month_names: [~, Jan, Feb, Mär, Apr, Mai, Jun, Jul, Aug, Sep, Okt, Nov, Dez]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default: "%d. %B %Y, %H:%M Uhr"
+      short: "%d. %B, %H:%M Uhr"
+      long: "%A, %d. %B %Y, %H:%M Uhr"
+      time: "%H:%M Uhr"
+      date: "%d. %B %Y"
+      shortmonth: "%d. %b. %Y"
+    am: "vormittags"
+    pm: "nachmittags"
+  distance:
+    centi:
+      one: "cm"
+      other: "cm"
+    unit:
+      one: "m"
+      other: "m"
+    thousand:
+      one: "km"
+      other: "km"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: 'eine halbe Minute'
+      less_than_x_seconds:
+        one: 'weniger als eine Sekunde'
+        other: 'weniger als %{count} Sekunden'
+      x_seconds:
+        one: 'eine Sekunde'
+        other: '%{count} Sekunden'
+      less_than_x_minutes:
+        one: 'weniger als eine Minute'
+        other: 'weniger als %{count} Minuten'
+      x_minutes:
+        one: 'eine Minute'
+        other: '%{count} Minuten'
+      about_x_hours:
+        one: 'etwa eine Stunde'
+        other: 'etwa %{count} Stunden'
+      x_days:
+        one: 'ein Tag'
+        other: '%{count} Tage'
+      about_x_months:
+        one: 'etwa ein Monat'
+        other: 'etwa %{count} Monate'
+      x_months:
+        one: 'ein Monat'
+        other: '%{count} Monate'
+      almost_x_years:
+        one: 'fast ein Jahr'
+        other: 'fast %{count} Jahre'
+      about_x_years:
+        one: 'etwa ein Jahr'
+        other: 'etwa %{count} Jahre'
+      over_x_years:
+        one: 'mehr als ein Jahr'
+        other: 'mehr als %{count} Jahre'
+    prompts:
+      second: "Sekunden"
+      minute: "Minuten"
+      hour: "Stunden"
+      day: "Tag"
+      month: "Monat"
+      year: "Jahr"
+
+  number:
+    format:
+      precision: 2
+      separator: ','
+      delimiter: '.'
+      significant: false
+      strip_insignificant_zeros: false
+    currency:
+      format:
+        unit: '€'
+        format: '%n%u'
+        separator: ","
+        delimiter: ""
+        precision: 2
+        significant: false
+        strip_insignificant_zeros: false
+    percentage:
+      format:
+        delimiter: ""
+    precision:
+      format:
+        delimiter: ""
+    human:
+      format:
+        delimiter: ""
+        precision: 1
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        # Storage units output formatting.
+        # %u is the storage unit, %n is the number (default: 2 MB)
+        format: "%n %u"
+        units:
+          byte:
+            one:   "Byte"
+            other: "Bytes"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+      decimal_units:
+        format: "%n %u"
+        units:
+          unit: ""
+          thousand: Tausend
+          million: Millionen
+          billion:
+            one: Milliarde
+            others: Milliarden
+          trillion: Billionen
+          quadrillion:
+            one: Billiarde
+            others: Billiarden
+
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " und "
+      last_word_connector: " und "
+    select:
+      prompt: "Bitte wählen:"
+
+  activerecord:
+    attributes:
+      course:
+        comment: "Kommentar"
+        file: "Datei"
+        name: "Name"
+      training:
+        distance_total: "Streckenlänge"
+        time_total: "ges. Zeit"
+        sportname: "Sportart"
+        sport_id: "Sportart"
+        coursename: "Strecke"
+        sportlevel: "Intensität"
+        start_time: "Datum"
+        comment: "Kommentar"
+        filename: "Datei"
+      lap:
+        distance: "Rundenlänge"
+        duration: "Dauer"
+        heartrate: Puls
+    errors:
+      template:
+        header:
+          one:    "Konnte %{model} nicht speichern: ein Fehler."
+          other:  "Konnte %{model} nicht speichern: %{count} Fehler."
+        body: "Bitte überprüfen Sie die folgenden Felder:"
+  helpers:
+    select:
+      # Default value for :prompt => true in FormOptionsHelper
+      prompt: "Please select"
+
+    # Default translation keys for submit FormHelper
+    label:
+         user:
+           remember_me: "erinnere dich an mich"
+           password: "Passwort"
+           password_confirmation: "Passwort bestätigen"
+           email: "EMail"
+    submit:
+      user:
+        create: "abschicken"
+        update: 'ändern'
+
+      create: 'Create %{model}'
+      update: 'Update %{model}'
+      submit: 'Save %{model}'

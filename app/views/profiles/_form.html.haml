@@ -1,0 +1,46 @@
+
+= form_for(@profile, :remote => true, :html => { :id=>"gform_2"} ) do |profile_form|
+  .gform_body
+    %ul#gform_fields_2.gform_fields
+      %li.gfield.gsection
+        %h2.gsection_title
+          Personal Details
+
+      - if @profile.errors.any?
+        #error_explanation
+          %h2= "#{pluralize(@profiler.errors.count, "error")} prohibited this profiler from being saved:"
+          %ul
+            - @profile.errors.full_messages.each do |msg|
+              %li= msg
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
+          = profile_form.label('firstname', t('editing.firstname'), :class=>"gfield_label")
+          = profile_form.text_field :firstname, :class =>"ginput_left"
+
+          = profile_form.label('lastname', t('editing.lastname'), :class=>"gfield_label")
+          = profile_form.text_field :lastname, :class =>"ginput_right"
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
+          = profile_form.label('min_avg', t('editing.min_pace'), :class=>"gfield_label")
+          = profile_form.text_field :min_avg, :class =>"ginput_left"
+
+          = profile_form.label('max_avg', t('editing.max_pace'), :class=>"gfield_label")
+          = profile_form.text_field :max_avg, :class =>"ginput_right"
+
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
+          = profile_form.label('distance',t("editing.max_distance"), :class=>"gfield_label")
+          = profile_form.text_field :distance, :class =>"ginput_left"
+      %li.gfield.gfield_contains_required
+        #meeting_points.ginput_complex.ginput_container
+          = profile_form.fields_for :meeting_points do |f_a_m|
+            .ginput_complex.ginput_container.meeting_points_description
+              = f_a_m.text_field :description, :class =>"ginput_left"
+        = profile_form.hidden_field :id
+
+
+    .actions
+      = profile_form.submit t('save'), :class=>"button gform_button"
+
+
+

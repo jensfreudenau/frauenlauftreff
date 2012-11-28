@@ -1,0 +1,13 @@
+:javascript
+  $(document).ready(function() {
+    create_map(#{@points});
+  });
+
+%h1.page-title.entry-title
+  = t("profile")
+.entry-content
+  #gform_wrapper_2.gf_browser_chrome.gform_wrapper
+    = render 'form'
+    #map{:class => 'map'}
+
+

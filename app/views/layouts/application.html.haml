@@ -1,0 +1,84 @@
+!!!
+/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">
+/[if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="en">
+/[if IE 8] <html class="no-js lt-ie9" lang="en">
+/ [if gt IE 8]><!
+%html.no-js{:lang => "en"}
+  / <![endif]
+  %head
+    %title Frauenlauftreff   
+    = stylesheet_link_tag "application", "style", "form"
+    = javascript_include_tag "application"
+  %body    
+    .container
+      .wrap
+        #header
+          #branding
+            #site-title
+              %span Frauenlauftreff
+            #site-description
+              %span Frauenlauftreff
+          #sidebar-header.sidebar
+            %a.logo.fleft{:href => "/"}
+              %img{:alt => "Frauenlauftreff", :src => "/assets/team.jpg"}
+          #menu-primary.menu-container
+            .menu
+              %ul#menu-primary-items
+                %li.menu-item
+                  %a(href="/") Home
+                %li
+                  = link_to t("messages")
+                %li
+                  %a{:href => "services.html"} Services
+                %li
+                  %a{:href => "blog.html"} Blog
+                %li
+                  %a{:href => "contact.html"} Contact
+                - if user_signed_in?
+                  %li{ :class => (params[:controller] == "profiles" ? "active" : nil) }
+                    = link_to t("profile"), profiles_path
+
+                  %li
+                    = link_to t("logout", :default => "Logout"), destroy_user_session_path, :method => :delete
+                - else
+                  = link_to t("login", :default => "Login"), new_user_session_path
+        .main
+          .aside
+            #menu-secondary
+              .wrap
+                .menu
+                  %ul.menu-secondary-items
+                    %li
+                      %a{:href => "/"} Home
+                    %li
+                      %a{:href => "about.html"} About
+                    %li
+                      %a{:href => "works.html"} Works
+                    %li
+                      %a{:href => "services.html"} Services
+                    %li
+                      %a{:href => "blog.html"} Blog
+                    %li
+                      %a{:href => "contact.html"} Contact
+          .content-wrap
+            #content
+              .hentry
+                %p#notice= notice
+                %p.alert= alert
+                = yield
+        #footer
+          #footer-content
+          #menu-subsidiary
+            .wrap
+              .menu
+                %ul#menu-subsidiary-items
+                  %li
+                    %a{:href => "#"} RSS
+                  %li
+                    %a{:href => "#"} Facebook
+                  %li
+                    %a{:href => "#"} Twitter
+                  %li
+                    %a{:href => "#"} Google+
+                  %li
+                    %a{:href => "#"} Flickr

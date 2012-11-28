@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  [max_avg: MyString
+  min_avg: MyString
+  distance: MyString
+  description: MyString
+  created_at: 2012-10-05 17:28:03
+  updated_at: 2012-10-05 17:28:03
+  user_id: 
+
+two:
+  [max_avg: MyString
+  min_avg: MyString
+  distance: MyString
+  description: MyString
+  created_at: 2012-10-05 17:28:03
+  updated_at: 2012-10-05 17:28:03
+  user_id: 
