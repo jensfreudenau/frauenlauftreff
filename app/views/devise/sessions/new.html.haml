@@ -1,18 +1,19 @@
 .grid.col-one-half.mq2-col-full
   %h2
     = t("sign_in")
-
-  = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-    %div
-      = f.label :email
-      = f.email_field :email, :placeholder => "JohnDoe@gmail.com", :required => "", :class => "required email"
-    %br/
-    %div
-      = f.label :password
-      = f.password_field :password, :required => "", :class => "required password"
-    - if devise_mapping.rememberable?
+  .gform_body
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       %div
-        = f.check_box :remember_me
-        = f.label :remember_me
-    %div= f.submit
+        = f.label :email
+        = f.email_field :email, :placeholder => "JohnDoe@gmail.com", :required => "", :class => "required email"
+      %br/
+      %div
+        = f.label :password
+        = f.password_field :password, :required => "", :class => "required password"
+      - if devise_mapping.rememberable?
+        %div
+          = f.check_box :remember_me
+          = f.label :remember_me
+      .actions
+        = f.submit t("sign_in"), :class=>"button gform_button"
   = render "devise/shared/links"

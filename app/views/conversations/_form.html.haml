@@ -1,0 +1,18 @@
+= form_for :conversation, url: :conversations do |f|
+  -#= f.text_field :recipients
+  -#= f.label(t('mailboxer.form.recipients'), :class=>"gfield_label")
+
+  = check_box_tag name= "recipients[]", value=2, checked = false
+  = label_tag(:pet_dog, "I own a dog")
+  = check_box_tag name= "recipients[]", value=1, checked = false
+  = label_tag(:pet_cat, "I own a cat")
+
+
+
+  = f.text_field :subject
+  = f.label(t('mailboxer.form.subject'), :class=>"gfield_label")
+
+  = f.text_area :body
+  = f.label(t('mailboxer.form.body'), :class=>"gfield_label")
+  .form-actions
+    %div= f.submit t("send"), :class=>"button gform_button"

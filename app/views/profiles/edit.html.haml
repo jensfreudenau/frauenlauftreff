@@ -1,6 +1,8 @@
+%link{:href => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", :rel => "stylesheet"}/
+%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
 :javascript
   $(document).ready(function() {
-    create_map(#{@points});
+    show_meeting_points(#{@points});
   });
 
 %h1.page-title.entry-title
@@ -8,6 +10,9 @@
 .entry-content
   #gform_wrapper_2.gf_browser_chrome.gform_wrapper
     = render 'form'
-    #map{:class => 'map'}
+    #map{:style => "width: 600px; height: 400px"}
+    :javascript
+      var map = L.map('map').setView([52.74918629941, 13.697693931639], 13);
+      map.on('click', addMarker);
 
 

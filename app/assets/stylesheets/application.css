@@ -30,7 +30,7 @@ html {
 }
 body {
 	margin: 0;
-	font: 0.75em/1.75em 'Helvetica Neue', Helvetica, Arial, sans-serif;	/* 12 / 16 = 0.75;  21 / 12 = 1.75 */
+	font: 1em/1.75em 'Helvetica Neue', Helvetica, Arial, sans-serif;	/* 12 / 16 = 0.75;  21 / 12 = 1.75 */
 	color: #444;
 	background: #fff;
 	padding: 0;
@@ -370,11 +370,11 @@ input[type="text"], input[type="password"], input[type="email"], .input-text, te
 	border: 1px solid #ccc;
 	padding: 5px;
 	outline: none;
-	font-size: 0.8125em;
 	color: #888;
 	margin: 0;
 	display: block;
 	background: #fff;
+    font-family:   Arial, sans-serif;
 }
 select { padding: 0; }
 input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus, .input-text:focus {
@@ -523,6 +523,7 @@ input[type="submit"]:hover { cursor: pointer }
 }
 .aside {
 	float: left;
+    padding-top: 8px;
 	width: 17.02127659574468%;	/* 160 / 940 = 0.1702127659574468 */
 }
 #sidebar-primary {
@@ -621,7 +622,7 @@ input[type="submit"]:hover { cursor: pointer }
 }
 #menu-primary li a {
 	font-family: 'Abel', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 1.333333333333333em;
+	font-size: 1.1em;
 	font-weight: 400;
 	line-height: 1em;
 	margin-right: 1em;
@@ -1336,6 +1337,7 @@ input[type="submit"]:hover { cursor: pointer }
 	color: #fff;
 	background:#0da4d3;
 	border: none;
+    margin-top: 10px;
 }
 #respond #submit:hover, .button:hover, .wpcf7-submit:hover, #loginform .button-primary:hover { background: #111; }
 .menu li a { position: relative; }
@@ -1482,4 +1484,12 @@ input[type="submit"]:hover { cursor: pointer }
 }
 .olpopupclosebox img {
     width: 17px;
+}
+
+.unreaded {
+    font-weight: bold;
+}
+
+.additional_info{
+    font-size: 0.7em;
 }

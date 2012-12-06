@@ -1,4 +1,10 @@
 de:
+  mailboxer:
+    form:
+      recipients: "Empfänger"
+      subject: "Betreff"
+      body: "Text"
+    send: "abschicken"
   errors:
     messages:
       not_found: "Nicht gefunden"
@@ -40,6 +46,8 @@ de:
   resend_unlock_instructions: "neu senden Anleitung"
   sign_up: "registriere dich"
   sign_in: "einloggen"
+  send: "abschicken"
+  cancel: "abbrechen"
   forgot_your_password: "Passwort vergessen?"
   resend_confirmation_instructions: "Noch mal die Bestätigung schicken"
   at: "am"
@@ -78,11 +86,13 @@ de:
   list: "Alle"
   new: "Neu"
   profile: "Profil"
+  conversation: "Nachrichten"
   all_courses: "Alle Strecken"
   all_trainings: "Training"
   statistics: "Statistik"
   save: "Speichern"
   new_training: "Neues Training"
+  meeting_point: "Treffpunkte"
   date:
     calendar:
       calendar_class: my_cool_calendar

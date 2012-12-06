@@ -12,6 +12,5 @@
     %div
       = f.label :password_confirmation
       = f.password_field :password_confirmation, :required => ""
-
-    %div= f.submit
+    %div= f.submit t("sign_up"), :class=>"button gform_button"
   = render "devise/shared/links"

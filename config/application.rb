@@ -62,5 +62,6 @@ module Frauenlauftreff
       g.template_engine :haml
     end
     #config.action_view.JavaScript_expansions[:defaults] = %w(jquery rails application)
+    config.assets.paths << "#{Rails.root}/app/assets/fonts"
   end
 end

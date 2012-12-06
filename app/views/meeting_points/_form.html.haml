@@ -1,0 +1,10 @@
+= form_for @meeting_point do |f|
+  - if @meeting_point.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@meeting_point.errors.count, "error")} prohibited this meeting_point from being saved:"
+      %ul
+        - @meeting_point.errors.full_messages.each do |msg|
+          %li= msg
+
+  .actions
+    = f.submit 'Save'

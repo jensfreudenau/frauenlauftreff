@@ -9,7 +9,7 @@
     %title Frauenlauftreff   
     = stylesheet_link_tag "application", "style", "form"
     = javascript_include_tag "application"
-  %body    
+  %body
     .container
       .wrap
         #header
@@ -26,22 +26,26 @@
               %ul#menu-primary-items
                 %li.menu-item
                   %a(href="/") Home
-                %li
-                  = link_to t("messages")
-                %li
-                  %a{:href => "services.html"} Services
+
+
                 %li
                   %a{:href => "blog.html"} Blog
                 %li
                   %a{:href => "contact.html"} Contact
                 - if user_signed_in?
+                  %li{ :class => (params[:controller] == "meeting_point" ? "active" : nil) }
+                    = link_to t("meeting_point"), meeting_points_path
                   %li{ :class => (params[:controller] == "profiles" ? "active" : nil) }
                     = link_to t("profile"), profiles_path
-
+                  %li{ :class => (params[:controller] == "conversations" ? "active" : nil) }
+                    = link_to t("conversation"), conversations_path
                   %li
                     = link_to t("logout", :default => "Logout"), destroy_user_session_path, :method => :delete
                 - else
-                  = link_to t("login", :default => "Login"), new_user_session_path
+                  %li
+                    = link_to t("login", :default => "Login"), new_user_session_path
+        %p#notice= notice
+        %p#alert= alert
         .main
           .aside
             #menu-secondary
@@ -61,10 +65,9 @@
                     %li
                       %a{:href => "contact.html"} Contact
           .content-wrap
+
             #content
               .hentry
-                %p#notice= notice
-                %p.alert= alert
                 = yield
         #footer
           #footer-content

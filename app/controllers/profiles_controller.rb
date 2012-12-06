@@ -1,11 +1,11 @@
+require 'yaml'
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   before_filter :authenticate_user!
   def index
-
     @profiles = Profile.where(:user_id => current_user.id)
-    respond_to do |format|
+      respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @profiles }
     end
@@ -35,7 +35,6 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
-    require 'pp'
     @points = Array.new
     @profile = Profile.find(params[:id])
     @profile.meeting_points.each do |val|
@@ -63,6 +62,17 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1.json
   def update
     @profile = Profile.find(params[:id])
+    #pp @profile
+    mp_params = Array.new
+    mp_params << params[:profile][:meeting_points_attributes]
+    puts '##########'
+    mp_params.each do |val|
+        val.each_with_index do |cont,ind|
+          cont.each do |h|
+            pp h[:id]
+          end
+        end
+    end
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
@@ -73,6 +83,7 @@ class ProfilesController < ApplicationController
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
+    abort
   end
 
   # DELETE /profiles/1

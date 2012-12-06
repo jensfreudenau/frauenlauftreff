@@ -7,5 +7,5 @@
     %div
       = f.label :email
       = f.email_field :email, :placeholder => "JohnDoe@gmail.com", :required => "", :class => "required email"
-    %div= f.submit
+    %div= f.submit t("send"), :class=>"button gform_button"
   = render "devise/shared/links"

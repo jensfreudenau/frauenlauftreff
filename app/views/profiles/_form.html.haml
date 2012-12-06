@@ -1,5 +1,5 @@
 
-= form_for(@profile, :remote => true, :html => { :id=>"gform_2"} ) do |profile_form|
+= form_for(@profile, :html => { :id=>"gform_2"} ) do |profile_form|
   .gform_body
     %ul#gform_fields_2.gform_fields
       %li.gfield.gsection
@@ -33,9 +33,11 @@
           = profile_form.text_field :distance, :class =>"ginput_left"
       %li.gfield.gfield_contains_required
         #meeting_points.ginput_complex.ginput_container
-          = profile_form.fields_for :meeting_points do |f_a_m|
+          = profile_form.fields_for :meeting_points do |mpf|
             .ginput_complex.ginput_container.meeting_points_description
-              = f_a_m.text_field :description, :class =>"ginput_left"
+              = mpf.text_field :description, :class =>"ginput_left"
+              = mpf.hidden_field :lat
+              = mpf.hidden_field :long
         = profile_form.hidden_field :id
 
 

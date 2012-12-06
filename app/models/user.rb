@@ -2,13 +2,24 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :token_authenticatable
   has_many :profiles
   after_create :create_profile
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me
-  # attr_accessible :title, :body
+
+  #mailboxer gem
+  acts_as_messageable
+
+  def name
+    email
+  end
+
+  def mailboxer_email(object)
+    email
+  end
 
   def self.build(opts = {})
       u = User.new(opts)
@@ -16,18 +27,18 @@ class User < ActiveRecord::Base
       u
     end
 
-    def setup(opts)
+  def setup(opts)
 
-      self.email = opts[:email]
+    self.email = opts[:email]
 
-      self.valid?
-      errors = self.errors
+    self.valid?
+    errors = self.errors
 
-    end
+  end
 
-    def create_profile
-      profile = Profile.new
-      profile.user_id = self.id
-      profile.save
-    end
+  def create_profile
+    profile = Profile.new
+    profile.user_id = self.id
+    profile.save
+  end
 end

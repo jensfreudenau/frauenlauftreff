@@ -8,6 +8,19 @@ Frauenlauftreff::Application.routes.draw do
 
   root :to => "homes#index"
   resources :profiles
+  resources :messages
+  resources :meeting_points
+  match '/profiles/kill_off_photo/:id', :to => 'profiles#kill_off_photo'
+  resources :conversations, :only=> [:index, :show, :new, :create] do
+      member do
+        post :reply
+        post :trash
+        post :untrash
+      end
+  end
+    #resources :conversations do
+    #  resources :messages
+    #end
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action

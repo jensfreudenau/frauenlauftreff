@@ -14,8 +14,8 @@ gem 'geokit'
 gem 'devise'
 gem 'cancan'
 gem 'mysql2'
-
-
+gem 'mailboxer'
+gem 'jquery-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -28,8 +28,9 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
 
+group :development do
+end
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
 
