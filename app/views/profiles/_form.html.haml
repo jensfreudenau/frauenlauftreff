@@ -1,5 +1,9 @@
 
 = form_for(@profile, :html => { :id=>"gform_2"} ) do |profile_form|
+  #map{:style => "width: 700px; height: 400px"}
+    :javascript
+      var map = L.map('map').setView([52.527377321443, 13.414247631488], 13);
+      map.on('click', addMarker);
   .gform_body
     %ul#gform_fields_2.gform_fields
       %li.gfield.gsection
@@ -21,6 +25,10 @@
           = profile_form.text_field :lastname, :class =>"ginput_right"
       %li.gfield.gfield_contains_required
         .ginput_complex.ginput_container
+          = profile_form.label('city', t('editing.city'), :class=>"gfield_label")
+          = profile_form.text_field :city, :class =>"ginput_left"
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
           = profile_form.label('min_avg', t('editing.min_pace'), :class=>"gfield_label")
           = profile_form.text_field :min_avg, :class =>"ginput_left"
 
@@ -37,7 +45,7 @@
             .ginput_complex.ginput_container.meeting_points_description
               = mpf.text_field :description, :class =>"ginput_left"
               = mpf.hidden_field :lat
-              = mpf.hidden_field :long
+              = mpf.hidden_field :lng
         = profile_form.hidden_field :id
 
 

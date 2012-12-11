@@ -20,27 +20,46 @@ text = {
     height:'Höhe',
     includeInWebsite:'In Webseite einbinden'
 }
-function removeMeetingPoint(key) {
-     map.removeLayer(marker[key]);
-     unloadAddress(key);
+//marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
+//        map.addLayer(marker[intIndex] );
+//        id++;
+//        html = objValue[2]+'<br /><a >'+text.delete+'</a>';
+//        var removeId = objValue[3];
+//        var domelem = document.createElement('p');
+//        domelem.href = "#";
+//        domelem.innerHTML = html;
+//        domelem.onclick = function(e) {
+//            removeMeetingPoint(id, removeId);
+//        };
+//         marker[intIndex].bindPopup(domelem);
+function removeMeetingPoint(id, key) {
+    $.ajax({
+          type: 'GET',
+          url: '/profiles/kill_off_photo/'+key,
+          success: function (xml) {
+              map.removeLayer(marker[id]);
+              unloadAddress(id);
+          }
+    });
  }
+
  function removeMarker(id) {
      unloadAddress(id);
  }
 
  function unloadAddress(id) {
-     $('#profile_meeting_points_attributes_' + id + '_long').remove();
+     $('#profile_meeting_points_attributes_' + id + '_lng').remove();
      $('#profile_meeting_points_attributes_' + id + '_lat').remove();
      $('#profile_meeting_points_attributes_' + id + '_description').remove();
-
+     $('#profile_meeting_points_attributes_' + id + '_id').remove();
  }
 
  function loadAddress(lon,lat, id) {
      $('<input>').attr({
          type:'hidden',
          value:lon,
-         id:'profile_meeting_points_attributes_' + id + '_long',
-         name:'profile[meeting_points_attributes][' + id + '][long]'
+         id:'profile_meeting_points_attributes_' + id + '_lng',
+         name:'profile[meeting_points_attributes][' + id + '][lng]'
      }).appendTo('form');
      $('<input>').attr({
          type:'hidden',
@@ -50,7 +69,7 @@ function removeMeetingPoint(key) {
      }).appendTo('form');
      $('<input>').attr({
          type:'text',
-         value:id,
+//         value:id,
          class: 'ginput_left',
          id:'profile_meeting_points_attributes_' + id + '_description',
          name:'profile[meeting_points_attributes][' + id + '][description]'
@@ -58,7 +77,7 @@ function removeMeetingPoint(key) {
 
  }
 
- function show_meeting_points(arg) {
+ function my_meeting_points(arg) {
 
      var htmlMarker;
      var id=0;
@@ -70,8 +89,8 @@ function removeMeetingPoint(key) {
      $.each(arg, function (intIndex, objValue) {
          marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
          map.addLayer(marker[intIndex] );
-         id++;;
-         html =  objValue[2]+'<br /><a onclick="removeMeetingPoint('+intIndex+');">'+text.delete+'</a>';
+         id++;
+         html =  objValue[2]+'<br /><a onclick="removeMeetingPoint('+intIndex+','+objValue[3]+');">'+text.delete+'</a>';
          marker[intIndex].bindPopup(html);
          marker[intIndex].on('dragend', function (e) {
              var coords = e.target._latlng;
@@ -89,12 +108,12 @@ function removeMeetingPoint(key) {
 
                      });
                      $("#profile_meeting_points_attributes_"+intIndex+"_lat").val(lat);
-                     $("#profile_meeting_points_attributes_"+intIndex+"_long").val(long);
+                     $("#profile_meeting_points_attributes_"+intIndex+"_lng").val(long);
                      $("#profile_meeting_points_attributes_"+intIndex+"_description").val(res);
                      htmlMarker = marker[intIndex];
 
                      id = intIndex;
-                     html =  res + '<br /><a onclick="removeMeetingPoint('+intIndex+');">'+text.delete+'</a>';
+                     html =  res + '<br /><a onclick="removeMeetingPoint('+intIndex+','+objValue[3]+');">'+text.delete+'</a>';
                      marker[intIndex].bindPopup(html).openPopup();
                  },
                  error:function (e) {
@@ -132,7 +151,7 @@ function removeMeetingPoint(key) {
              loadAddress(long, lat, index);
              $("#profile_meeting_points_attributes_"+index+"_description").val(res);
              $("#profile_meeting_points_attributes_"+index+"_lat").val(lat);
-             $("#profile_meeting_points_attributes_"+index+"_long").val(long);
+             $("#profile_meeting_points_attributes_"+index+"_lng").val(long);
              id = index;
              html = res+'<br /><a >'+text.delete+'</a>';
              var domelem = document.createElement('p');
@@ -163,7 +182,7 @@ function removeMeetingPoint(key) {
                  });
                  $("#profile_meeting_points_attributes_"+index+"_description").val(res);
                  $("#profile_meeting_points_attributes_"+index+"_lat").val(lat);
-                 $("#profile_meeting_points_attributes_"+index+"_long").val(long);
+                 $("#profile_meeting_points_attributes_"+index+"_lng").val(long);
                  html = res+'<br /><a >'+text.delete+'</a>';
                  var domelem = document.createElement('p');
                  domelem.href = "#";
@@ -180,5 +199,20 @@ function removeMeetingPoint(key) {
          });
      });
      index++;
+ }
 
+function show_meeting_points(arg) {
+
+     var htmlMarker;
+     var id=0;
+     L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+         maxZoom:18,
+         attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
+     }).addTo(map);
+
+     $.each(arg, function (intIndex, objValue) {
+         marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:false});
+         map.addLayer(marker[intIndex] );
+         marker[intIndex].bindPopup(objValue[2]);
+     });
  }

@@ -1,20 +1,15 @@
 %link{:href => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", :rel => "stylesheet"}/
 %script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-
+= javascript_include_tag 'leaflet_embed'
 :javascript
-  $(document).ready(function() {
-    //show_meeting_points(#{@points});
-  });
-%table
-  - @meeting_points.each do |meeting_point|
-    %tr
-      %td= link_to 'Show', meeting_point
-      %td= link_to 'Edit', edit_meeting_point_path(meeting_point)
-      %td= link_to 'Destroy', meeting_point, method: :delete, data: { confirm: 'Are you sure?' }
 
+  $(document).ready(function() {
+    initmap(#{@lat},#{@lng});
+  });
 
 %h1.page-title.entry-title
-  = t("profile")
+  = t("map")
 .entry-content
   #gform_wrapper_2.gf_browser_chrome.gform_wrapper
-    #map{:class => 'map'}
+    #map{:style => "width: 700px; height: 400px"}
+

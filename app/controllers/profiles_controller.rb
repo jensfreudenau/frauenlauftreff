@@ -1,8 +1,8 @@
-require 'yaml'
+require 'open-uri'
 class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
   def index
     @profiles = Profile.where(:user_id => current_user.id)
       respond_to do |format|
@@ -38,14 +38,25 @@ class ProfilesController < ApplicationController
     @points = Array.new
     @profile = Profile.find(params[:id])
     @profile.meeting_points.each do |val|
-      @points  << [ val.long, val.lat, val.description, val.id ]
+      @points  << [ val.lng, val.lat, val.description, val.id ]
     end
   end
-
+  def kill_off_photo
+    @meeting_point = MeetingPoint.find(params[:id])
+    @meeting_point.destroy
+    render :layout => false
+  end
   # POST /profiles
   # POST /profiles.json
   def create
     @profile = Profile.new(params[:profile])
+
+    unless params[:profile][:city].nil?
+      load_latlong_by_city(params[:profile][:city])
+      params[:profile][:lat] = @lat
+      params[:profile][:lng] = @lng
+    end
+
 
     respond_to do |format|
       if @profile.save
@@ -62,19 +73,14 @@ class ProfilesController < ApplicationController
   # PUT /profiles/1.json
   def update
     @profile = Profile.find(params[:id])
-    #pp @profile
-    mp_params = Array.new
-    mp_params << params[:profile][:meeting_points_attributes]
-    puts '##########'
-    mp_params.each do |val|
-        val.each_with_index do |cont,ind|
-          cont.each do |h|
-            pp h[:id]
-          end
-        end
-    end
+
 
     respond_to do |format|
+      unless params[:profile][:city].nil?
+        load_latlong_by_city(params[:profile][:city])
+        params[:profile][:lat] = @lat
+        params[:profile][:lng] = @lng
+      end
       if @profile.update_attributes(params[:profile])
         format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
@@ -83,7 +89,7 @@ class ProfilesController < ApplicationController
         format.json { render json: @profile.errors, status: :unprocessable_entity }
       end
     end
-    abort
+
   end
 
   # DELETE /profiles/1
@@ -97,4 +103,19 @@ class ProfilesController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  private
+
+  def load_latlong_by_city(city)
+    doc = fetch "http://nominatim.openstreetmap.org/search?format=xml&q=" + city.gsub(' ', ',').to_s
+    doc.remove_namespaces!
+    @lat = doc.xpath("//searchresults/place").first["lat"].to_f
+    @lng = doc.xpath("//searchresults/place").first["lon"].to_f
+  end
+
+  def fetch(uri_str, limit = 10)
+    Nokogiri::XML(open(uri_str))
+  end
+
+
 end

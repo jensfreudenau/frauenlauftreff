@@ -9,7 +9,18 @@ Frauenlauftreff::Application.routes.draw do
   root :to => "homes#index"
   resources :profiles
   resources :messages
-  resources :meeting_points
+  resources :meeting_points do
+
+        get :map_points, :on => :collection
+
+  end
+  #match '/meeting_points/map_points/:latmax/:lngmax/:latmin/:lngmin', :to => 'meeting_points#map_points'
+  #match '/meeting_points/map_points/:box', :to => 'meeting_points#map_points'
+  resources :profiles do
+    member do
+      get :kill_off_photo
+    end
+  end
   match '/profiles/kill_off_photo/:id', :to => 'profiles#kill_off_photo'
   resources :conversations, :only=> [:index, :show, :new, :create] do
       member do

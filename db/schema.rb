@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121128143950) do
+ActiveRecord::Schema.define(:version => 20121207150739) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20121128143950) do
 
   create_table "meeting_points", :force => true do |t|
     t.string   "lat"
-    t.string   "long"
+    t.string   "lng"
     t.integer  "profile_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -62,6 +62,9 @@ ActiveRecord::Schema.define(:version => 20121128143950) do
     t.integer  "user_id"
     t.string   "firstname"
     t.string   "lastname"
+    t.string   "city"
+    t.string   "lat"
+    t.string   "lng"
   end
 
   create_table "receipts", :force => true do |t|

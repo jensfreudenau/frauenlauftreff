@@ -3,22 +3,40 @@ class MeetingPointsController < ApplicationController
   # GET /meeting_points.json
   before_filter :authenticate_user!
   def index
-
     #@meeting_points = MeetingPoint.without_own_profile(current_user.id)
-    @meeting_points = MeetingPoint.all
-    #pp current_user.id
-    #profile         = Profile.where(:user_id => current_user.id).first
+    profile         = Profile.where(:user_id => current_user.id).first
+    @lat = profile.lat
+    @lng = profile.lng
 
     @points         = Array.new
-    @meeting_points.each do |val|
-      @points  << [ val.long, val.lat, val.description, val.id ]
-    end
+    #@meeting_points.each do |val|
+    #  @points  << [ val.long, val.lat, val.description, val.id ]
+    #end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @meeting_points }
     end
   end
 
+  def map_points
+    #render :nothing => true
+
+    #profile         = Profile.where(:user_id => current_user.id).first
+    @points         = Array.new
+    args = Hash.new
+    args[:user_id]  = current_user.id
+    args[:latmin]   = params[:latmin]
+    args[:lngmin]   = params[:lngmin]
+    args[:latmax]   = params[:latmax]
+    args[:lngmax]   = params[:lngmax]
+    @meeting_points = MeetingPoint.map_points_wo_own_profile(args)
+    @meeting_points.each do |val|
+      @points  << [ val.lng, val.lat, val.description, val.id ]
+    end
+    respond_to do |format|
+      format.js { render :json => @points }
+    end
+  end
   # GET /meeting_points/1
   # GET /meeting_points/1.json
   def show
