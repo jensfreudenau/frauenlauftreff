@@ -6,7 +6,7 @@ gem 'rails', '3.2.11'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 gem 'nokogiri'
 gem 'haml-rails'
-gem "haml"
+gem 'haml'
 gem 'json'
 gem 'numerizer'
 gem 'chronic_duration'
@@ -16,6 +16,7 @@ gem 'cancan'
 gem 'mysql2'
 gem 'mailboxer'
 gem 'jquery-rails'
+gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
