@@ -5,6 +5,6 @@
       %ul
         - @meeting_point.errors.full_messages.each do |msg|
           %li= msg
-
-  .actions
-    = f.submit 'Save'
+  #descriptions
+  .form-actions
+    %div= f.submit t("send"), :class=>"button gform_button"

@@ -3,13 +3,13 @@
     = link_to conversation.subject, conversation , {:class => "unreaded"}
     %span.additional_info
       = localize(conversation.created_at, :format => :default) + ", "
-      = conversation.originator.email + " | "
+      = conversation.originator.username + " | "
       = link_to 'Move to trash', [:trash, conversation], method: :post
   - else
     = link_to conversation.subject,  conversation , {:class => "readed"}
     %span.additional_info
       = localize(conversation.created_at, :format => :default) + ", "
-      = conversation.originator.email
+      = conversation.originator.username
       |
       - if conversation.is_completely_trashed?(current_user)
         = link_to 'Untrash', [:untrash, conversation], method: :post

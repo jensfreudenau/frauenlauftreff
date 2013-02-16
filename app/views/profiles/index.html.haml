@@ -1,17 +1,34 @@
-%h1= t('profile')
+:javascript
+  $(document).ready(function() {
+    my_meeting_points(#{@points});
+  });
+#content
+  .mailboxer-top
+    .top-header
+      %h2= t('profile')
+    .top-link
+      = link_to t('edit'), edit_profile_path(@profiles.first), {:class => 'readed'}
+  .profile
+    .details
+      %dl
+        - @profiles.each do |profile|
+          %dt= t('editing.max_distance')
+          %dd= profile.distance
+          %dt= t('editing.max_pace')
+          %dd= profile.max_avg
+          %dt= t('editing.min_pace')
+          %dd= profile.min_avg
+          %dt= t('editing.description')
+          %dd= profile.description
 
-%table
-  %tr
-    %th= t('editing.max_distance')
-    %th= t('editing.max_pace')
-    %th= t('editing.min_pace')
-    %th= t('editing.description')
-    %th= link_to t("edit"), edit_profile_path(@profiles.first)
-  - @profiles.each do |profile|
+    .map
+      #map{:style => 'width: 400px; height: 300px;'}
+        :javascript
+          var map = L.map('map');
+          map.fitBounds([
+              [#{@bounds[:lat_min]}, #{@bounds[:lng_max]}],
+              [#{@bounds[:lat_max]}, #{@bounds[:lng_min]}]
+          ]);
+          map.on('click', addMarker);
 
-    %tr
-      %td= profile.distance
-      %td= profile.max_avg
-      %td= profile.min_avg
-      %td= profile.description
 

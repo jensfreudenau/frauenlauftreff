@@ -1,0 +1,28 @@
+#content
+  .mailboxer-top
+    %h2= t("mailboxer.sentbox")
+    = link_to t('start_conversation'), :new_conversation
+
+  %table.inboxsentbox
+    %th
+      = t('mailboxer.form.subject')
+    %th
+      = t('at')
+    %th
+      = t('delete')
+    - @msg.each do |conversation|
+      %tr
+        - if conversation.is_unread?(current_user)
+          %td
+            = link_to conversation.subject, conversation , {:class => "unreaded"}
+        - else
+          %td
+            = link_to conversation.subject,  conversation , {:class => "readed"}
+        %td.byline.byline-date
+          = localize(conversation.created_at, :format => :default)
+        %td
+          = link_to t('delete'), [:trash, conversation], method: :post
+
+
+
+

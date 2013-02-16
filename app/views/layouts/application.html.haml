@@ -3,12 +3,12 @@
 /[if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="en">
 /[if IE 8] <html class="no-js lt-ie9" lang="en">
 / [if gt IE 8]><!
-%html.no-js{:lang => "en"}
+%html.no-js{:lang => "de"}
   / <![endif]
   %head
     %title Frauenlauftreff   
-    = stylesheet_link_tag "application", "style", "form"
-    = javascript_include_tag "application"
+    = stylesheet_link_tag "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css","application", "style", "form"
+    = javascript_include_tag "rails"
   %body
     .container
       .wrap
@@ -26,19 +26,25 @@
               %ul#menu-primary-items
                 %li.menu-item
                   %a(href="/") Home
-
-
-                %li
-                  %a{:href => "blog.html"} Blog
-                %li
-                  %a{:href => "contact.html"} Contact
                 - if user_signed_in?
                   %li{ :class => (params[:controller] == "meeting_point" ? "active" : nil) }
-                    = link_to t("meeting_point"), meeting_points_path
+                    = link_to t("meeting_point"), new_meeting_point_path
                   %li{ :class => (params[:controller] == "profiles" ? "active" : nil) }
                     = link_to t("profile"), profiles_path
                   %li{ :class => (params[:controller] == "conversations" ? "active" : nil) }
-                    = link_to t("conversation"), conversations_path
+
+                    = link_to conversations_path(:box => 'inbox'), {:class => " sf-with-ul"} do
+                      = t("conversation")
+                      %span.sf-sub-indicator
+                        »
+
+                    %ul.sub-menu
+                      -if current_user.mailbox.inbox({:read => false}).count.to_i > 0
+                        %li= link_to t("mailboxer.inbox"), conversations_path(:box => 'inbox') , {:class => " sf-with-ul red"}
+                      - else
+                        %li= link_to t("mailboxer.inbox"), conversations_path(:box => 'inbox') , {:class => " sf-with-ul"}
+                      %li= link_to t("mailboxer.sentbox"), conversations_path(:box => 'sentbox') , {:class => " sf-with-ul"}
+
                   %li
                     = link_to t("logout", :default => "Logout"), destroy_user_session_path, :method => :delete
                 - else
@@ -48,27 +54,8 @@
         %p#alert= alert
         .main
           .aside
-            #menu-secondary
-              .wrap
-                .menu
-                  %ul.menu-secondary-items
-                    %li
-                      %a{:href => "/"} Home
-                    %li
-                      %a{:href => "about.html"} About
-                    %li
-                      %a{:href => "works.html"} Works
-                    %li
-                      %a{:href => "services.html"} Services
-                    %li
-                      %a{:href => "blog.html"} Blog
-                    %li
-                      %a{:href => "contact.html"} Contact
           .content-wrap
-
-            #content
-              .hentry
-                = yield
+            = yield
         #footer
           #footer-content
           #menu-subsidiary
@@ -85,3 +72,5 @@
                     %a{:href => "#"} Google+
                   %li
                     %a{:href => "#"} Flickr
+
+

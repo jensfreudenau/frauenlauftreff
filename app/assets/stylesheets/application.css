@@ -29,8 +29,8 @@ html {
 	-ms-text-size-adjust: 100%;
 }
 body {
+    font:0.75em/1.75em 'Helvetica Neue',Helvetica,Arial,sans-serif ;
 	margin: 0;
-	font: 1em/1.75em 'Helvetica Neue', Helvetica, Arial, sans-serif;	/* 12 / 16 = 0.75;  21 / 12 = 1.75 */
 	color: #444;
 	background: #fff;
 	padding: 0;
@@ -144,8 +144,8 @@ sub, sup {
 sup { top: -0.5em; }
 sub { bottom: -0.25em; }
 ul {
-	list-style: circle;
-	margin: 0 0 1.75em 2.8em;
+	list-style: none;
+	margin: 0 ;
 	padding: 0;
 }
 ol {
@@ -512,27 +512,28 @@ input[type="submit"]:hover { cursor: pointer }
 }
 .page-template-fullwidth #content { width: 100%; }
 .content-wrap {
-	float: right;
-	width: 79.78723404255319%;	/* 750 / 940 = 0.79787234042553 */
+
+	width: 100%;	/* 750 / 940 = 0.79787234042553 */
 }
 .page-template-fullwidth .content-wrap { width: 100%; }
 #content {
 	float: left;
-	width: 95%;	/* 470 / 750 = 0.6266666666666667 */
+	width: 75%;	/* 470 / 750 = 0.6266666666666667 */
 	margin: 0 0 30px 0;
 }
 .aside {
-	float: left;
+	float: right;
     padding-top: 8px;
-	width: 17.02127659574468%;	/* 160 / 940 = 0.1702127659574468 */
+	width: 27%;	/* 160 / 940 = 0.1702127659574468 */
 }
 #sidebar-primary {
 	float: left;
 	width: 100%;	/* 160 / 940 = 0.1702127659574468 */
 }
 #sidebar-secondary {
+    margin-top: 60px;
 	float: right;
-	width: 5%;	/* 250 / 750 = 0.3333333333333333 */
+	width: 24%;	/* 250 / 750 = 0.3333333333333333 */
 }
 .wrap {
 	max-width: 940px;
@@ -1210,7 +1211,7 @@ input[type="submit"]:hover { cursor: pointer }
 -------------------------------------------------------------- */
 #respond {
 	overflow: hidden;
-	width: 100%;
+	width: 60%;
 }
 .comment-list #respond { margin-top: 1.75em; }
 #respond .log-in-out {
@@ -1476,7 +1477,7 @@ input[type="submit"]:hover { cursor: pointer }
     margin-top: 30px;
     width: 700px;
     height: 400px;
-    float:right;
+
 }
 .olPopupCloseBox {
   background: url("/assets/cross.png") no-repeat;
@@ -1491,5 +1492,53 @@ input[type="submit"]:hover { cursor: pointer }
 }
 
 .additional_info{
-    font-size: 0.7em;
+    font-size: 0.9em;
+}
+
+p.sender {
+    font-size: 12px;
+}
+
+.hentry ul{
+    font-size: 0.8em;
+    width: 70%;
+    padding:10px;
+    border: 1px solid #BBBBBB;
+}
+
+table.inboxsentbox th, table.inboxsentbox td {
+    font-size: 0.95em;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+.mailboxer-top{
+    height: 50px;
+}
+.mailboxer-top .top-link {
+    float: right;
+    margin-left: 115px;
+    padding-top: 9px;
+}
+.mailboxer-top .top-header {
+    /*float: left;*/
+    border-bottom: 1px solid #CCCCCC;
+
+}
+.mailboxer-top .top-header h2 {
+    margin:0;
+}
+.red {
+    color:#c71585 !important;
+}
+.profile {
+    margin-top: 25px;
+    width: 605px;
+}
+.profile .details {
+    width: 300px;
+    float:left;
+}
+.profile .map {
+
+    width:300px;
 }

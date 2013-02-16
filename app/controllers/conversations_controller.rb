@@ -4,8 +4,14 @@ class ConversationsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:untrash, :trash]
 
   def index
+    if (params[:box].eql? "inbox") || (params[:box].nil?)
+      @msg =  current_user.mailbox.inbox
+      render 'inbox'
 
-    puts '######@messages_count########' + current_user.mailbox.inbox({:read => false}).count.to_s
+    elsif params[:box].eql? "sentbox"
+      @msg = current_user.mailbox.sentbox
+      render 'sentbox'
+    end
   end
 
   def create
@@ -58,7 +64,9 @@ class ConversationsController < ApplicationController
   end
 
   private
-
+  def get_mailbox
+      @mailbox = current_subject.mailbox
+    end
   def mailbox
     @mailbox ||= current_user.mailbox
   end

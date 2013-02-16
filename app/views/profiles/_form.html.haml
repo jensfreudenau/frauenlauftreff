@@ -1,9 +1,19 @@
+-#= form_for(@user, :html => { :id=>"gform_2"} ) do |user_form|
+  -#= user_form.text_field :username
 
-= form_for(@profile, :html => { :id=>"gform_2"} ) do |profile_form|
-  #map{:style => "width: 700px; height: 400px"}
+= form_for(@profile, :html => { :id=>'gform_2'} ) do |profile_form|
+  -#= profile_form.user.text_field :username
+  #map{:style => 'width: 600px; height: 400px;float:left;'}
     :javascript
       var map = L.map('map').setView([52.527377321443, 13.414247631488], 13);
       map.on('click', addMarker);
+  .aside
+    #meeting_points
+      = profile_form.fields_for :meeting_points do |mpf|
+        .meeting_points_description
+          = mpf.text_field :description, :size =>"30"
+          = mpf.hidden_field :lat
+          = mpf.hidden_field :lng
   .gform_body
     %ul#gform_fields_2.gform_fields
       %li.gfield.gsection
@@ -12,7 +22,7 @@
 
       - if @profile.errors.any?
         #error_explanation
-          %h2= "#{pluralize(@profiler.errors.count, "error")} prohibited this profiler from being saved:"
+          %h2= "#{pluralize(@profiler.errors.count, 'error')} prohibited this profiler from being saved:"
           %ul
             - @profile.errors.full_messages.each do |msg|
               %li= msg
@@ -20,9 +30,10 @@
         .ginput_complex.ginput_container
           = profile_form.label('firstname', t('editing.firstname'), :class=>"gfield_label")
           = profile_form.text_field :firstname, :class =>"ginput_left"
-
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
           = profile_form.label('lastname', t('editing.lastname'), :class=>"gfield_label")
-          = profile_form.text_field :lastname, :class =>"ginput_right"
+          = profile_form.text_field :lastname, :class =>"ginput_left"
       %li.gfield.gfield_contains_required
         .ginput_complex.ginput_container
           = profile_form.label('city', t('editing.city'), :class=>"gfield_label")
@@ -31,21 +42,16 @@
         .ginput_complex.ginput_container
           = profile_form.label('min_avg', t('editing.min_pace'), :class=>"gfield_label")
           = profile_form.text_field :min_avg, :class =>"ginput_left"
-
+      %li.gfield.gfield_contains_required
+        .ginput_complex.ginput_container
           = profile_form.label('max_avg', t('editing.max_pace'), :class=>"gfield_label")
-          = profile_form.text_field :max_avg, :class =>"ginput_right"
+          = profile_form.text_field :max_avg, :class =>"ginput_left"
 
       %li.gfield.gfield_contains_required
         .ginput_complex.ginput_container
           = profile_form.label('distance',t("editing.max_distance"), :class=>"gfield_label")
           = profile_form.text_field :distance, :class =>"ginput_left"
-      %li.gfield.gfield_contains_required
-        #meeting_points.ginput_complex.ginput_container
-          = profile_form.fields_for :meeting_points do |mpf|
-            .ginput_complex.ginput_container.meeting_points_description
-              = mpf.text_field :description, :class =>"ginput_left"
-              = mpf.hidden_field :lat
-              = mpf.hidden_field :lng
+
         = profile_form.hidden_field :id
 
 

@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :profiles
   after_create :create_profile
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email,:username, :password, :password_confirmation, :remember_me
 
   #mailboxer gem
   acts_as_messageable

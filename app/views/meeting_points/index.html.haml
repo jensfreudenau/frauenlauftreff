@@ -1,6 +1,5 @@
-%link{:href => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", :rel => "stylesheet"}/
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
-= javascript_include_tag 'leaflet_embed'
+= stylesheet_link_tag "MarkerCluster", "MarkerCluster.Default", "MarkerCluster.Default.ie"
+
 :javascript
 
   $(document).ready(function() {
@@ -12,4 +11,8 @@
 .entry-content
   #gform_wrapper_2.gf_browser_chrome.gform_wrapper
     #map{:style => "width: 700px; height: 400px"}
+
+
+  #descriptions
+
 

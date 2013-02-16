@@ -3,15 +3,17 @@ class MeetingPointsController < ApplicationController
   # GET /meeting_points.json
   before_filter :authenticate_user!
   def index
-    #@meeting_points = MeetingPoint.without_own_profile(current_user.id)
-    profile         = Profile.where(:user_id => current_user.id).first
-    @lat = profile.lat
-    @lng = profile.lng
+    @lat    = 52.515803012883595
+    @lng    = 13.376712799072266
+    profile = Profile.where(:user_id => current_user.id).first
+    unless profile.lat.nil?
+      @lat = profile.lat
+    end
+    unless profile.lng.nil?
+      @lng = profile.lng
+    end
 
     @points         = Array.new
-    #@meeting_points.each do |val|
-    #  @points  << [ val.long, val.lat, val.description, val.id ]
-    #end
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @meeting_points }
@@ -19,20 +21,24 @@ class MeetingPointsController < ApplicationController
   end
 
   def map_points
-    #render :nothing => true
-
-    #profile         = Profile.where(:user_id => current_user.id).first
     @points         = Array.new
-    args = Hash.new
+    args            = Hash.new
     args[:user_id]  = current_user.id
     args[:latmin]   = params[:latmin]
     args[:lngmin]   = params[:lngmin]
     args[:latmax]   = params[:latmax]
     args[:lngmax]   = params[:lngmax]
+
     @meeting_points = MeetingPoint.map_points_wo_own_profile(args)
     @meeting_points.each do |val|
-      @points  << [ val.lng, val.lat, val.description, val.id ]
+      user = User.where(:id => val.profile.user_id).all
+      username = Array.new
+      user.each do |u|
+        username << u.username
+      end
+      @points  << [ val.lng, val.lat, val.description, val.id, val.profile.user_id, username.first]
     end
+
     respond_to do |format|
       format.js { render :json => @points }
     end
@@ -51,6 +57,17 @@ class MeetingPointsController < ApplicationController
   # GET /meeting_points/new
   # GET /meeting_points/new.json
   def new
+    @lat    = 52.515803012883595
+    @lng    = 13.376712799072266
+    profile = Profile.where(:user_id => current_user.id).first
+    unless profile.lat.nil?
+      @lat = profile.lat
+    end
+    unless profile.lng.nil?
+      @lng = profile.lng
+    end
+
+    @points         = Array.new
     @meeting_point = MeetingPoint.new
 
     respond_to do |format|

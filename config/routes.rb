@@ -10,9 +10,7 @@ Frauenlauftreff::Application.routes.draw do
   resources :profiles
   resources :messages
   resources :meeting_points do
-
-        get :map_points, :on => :collection
-
+    get :map_points, :on => :collection
   end
   #match '/meeting_points/map_points/:latmax/:lngmax/:latmin/:lngmin', :to => 'meeting_points#map_points'
   #match '/meeting_points/map_points/:box', :to => 'meeting_points#map_points'

@@ -1,5 +1,5 @@
 class MeetingPoint < ActiveRecord::Base
-  attr_accessible :id, :lat, :long, :description#, :meeting_points_attributes
+  attr_accessible :id, :lat, :lng, :description#, :meeting_points_attributes
   #has_one :profile
   belongs_to :profile
   #accepts_nested_attributes_for :profile
@@ -15,5 +15,6 @@ class MeetingPoint < ActiveRecord::Base
     .where('meeting_points.lng > ?', args[:lngmin].to_f)
     .where('meeting_points.lat < ?', args[:latmax].to_f)
     .where('meeting_points.lng < ?', args[:lngmax].to_f)
+    .all
   }
 end

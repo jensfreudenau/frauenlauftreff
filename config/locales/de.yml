@@ -4,7 +4,11 @@ de:
       recipients: "Empfänger"
       subject: "Betreff"
       body: "Text"
+      from: "von"
     send: "abschicken"
+    inbox: "Posteingang"
+    sentbox: "Gesendet"
+
   errors:
     messages:
       not_found: "Nicht gefunden"
@@ -71,6 +75,7 @@ de:
   trainings: "Training"
   map: "Karte"
   create trainings route: "Trainingsroute anlegen"
+  reply: "antworten"
   editing:
     profile: "Profil bearbeiten"
     max_distance: "max. Lauflänge"
@@ -85,7 +90,7 @@ de:
   back: "zurück"
   list: "Alle"
   new: "Neu"
-  profile: "Profil"
+  profile: "Dein Profil"
   conversation: "Nachrichten"
   all_courses: "Alle Strecken"
   all_trainings: "Training"
@@ -93,6 +98,7 @@ de:
   save: "Speichern"
   new_training: "Neues Training"
   meeting_point: "Treffpunkte"
+  start_conversation: Neue Nachricht schreiben
   date:
     calendar:
       calendar_class: my_cool_calendar
@@ -265,6 +271,8 @@ de:
           one:    "Konnte %{model} nicht speichern: ein Fehler."
           other:  "Konnte %{model} nicht speichern: %{count} Fehler."
         body: "Bitte überprüfen Sie die folgenden Felder:"
+      messages:
+        record_invalid: "Abfrage ungültig"
   helpers:
     select:
       # Default value for :prompt => true in FormOptionsHelper

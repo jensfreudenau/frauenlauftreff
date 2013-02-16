@@ -16,6 +16,10 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 		disableClusteringAtZoom: null,
 
+        // Setting this to false prevents the removal of any clusters outside of the viewpoint, which
+        // is the default behaviour for performance reasons.
+        removeOutsideVisibleBounds: true,
+
 		//Whether to animate adding markers after adding the MarkerClusterGroup to the map
 		// If you are adding individual markers set to true, if adding bulk markers leave false for massive performance gains.
 		animateAddingMarkers: false,
@@ -118,13 +122,14 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 	//Takes an array of markers and adds them in bulk
 	addLayers: function (layersArray) {
+		var i, l, m;
 		if (!this._map) {
 			this._needsClustering = this._needsClustering.concat(layersArray);
 			return this;
 		}
 
-		for (var i = 0, l = layersArray.length; i < l; i++) {
-			var m = layersArray[i];
+		for (i = 0, l = layersArray.length; i < l; i++) {
+			m = layersArray[i];
 
 			if (this.hasLayer(m)) {
 				continue;
@@ -141,6 +146,17 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 				}
 			}
 		}
+
+		//Update the icons of all those visible clusters that were affected
+		for (i in this._layers) {
+			if (this._layers.hasOwnProperty(i)) {
+				m = this._layers[i];
+				if (m instanceof L.MarkerCluster && m._iconNeedsUpdate) {
+					m._updateIcon();
+				}
+			}
+		}
+
 		this._topClusterLevel._recursivelyAddChildrenToMap(null, this._zoom, this._currentShownBounds);
 
 		return this;
@@ -209,6 +225,10 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 			}
 		}
 
+		this.eachLayer(function (marker) {
+			delete marker.__parent;
+		});
+
 		if (this._map) {
 			//Reset _topClusterLevel and the DistanceGrids
 			this._generateInitialClusters();
@@ -228,6 +248,20 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 			}
 		}
 		return bounds;
+	},
+
+	//Overrides LayerGroup.eachLayer
+	eachLayer: function (method, context) {
+		var markers = this._needsClustering.slice(),
+		    i;
+
+		if (this._topClusterLevel) {
+			this._topClusterLevel.getAllChildMarkers(markers);
+		}
+
+		for (i = markers.length - 1; i >= 0; i--) {
+			method.call(context, markers[i]);
+		}
 	},
 
 	//Returns true if the given layer is in this MarkerClusterGroup
@@ -284,7 +318,7 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 	//Overrides FeatureGroup.onAdd
 	onAdd: function (map) {
-		L.FeatureGroup.prototype.onAdd.call(this, map);
+		this._map = map;
 
 		if (!this._gridClusters) {
 			this._generateInitialClusters();
@@ -333,14 +367,14 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 			this._spiderfierOnRemove();
 		}
 
-		L.FeatureGroup.prototype.onRemove.call(this, map);
-
 		//Clean up all the layers we added to the map
 		for (var i in this._layers) {
 			if (this._layers.hasOwnProperty(i)) {
 				L.FeatureGroup.prototype.removeLayer.call(this, this._layers[i]);
 			}
 		}
+
+		this._map = null;
 	},
 
 
@@ -650,6 +684,10 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	
 	//Gets the maps visible bounds expanded in each direction by the size of the screen (so the user cannot see an area we do not cover in one pan)
 	_getExpandedVisibleBounds: function () {
+        if (!this.options.removeOutsideVisibleBounds) {
+            return this.getBounds();
+        }
+
 		var map = this._map,
 			bounds = map.getBounds(),
 			sw = bounds._southWest,

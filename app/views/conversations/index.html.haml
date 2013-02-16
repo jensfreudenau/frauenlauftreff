@@ -1,9 +1,25 @@
-= link_to t('Start Conversation'), :new_conversation
-%h1 Conversations
-%h2 Inbox
-%ul= render mailbox.inbox
-%h2 Sentbox
-%ul= render mailbox.sentbox
-%h2 Trash
-%ul= render mailbox.trash
+:javascript
+  $(document).ready(function(){
+    jQuery("#tabs").tabs();
+  });
+= link_to t('start_conversation'), :new_conversation
+= link_to 'Inbox', conversations_path(:box => 'sentbox')
+#content
+  #tabs
+    %ul.tabs
+      %li
+        = link_to "Inbox", "#tab_1"
+      %li
+        = link_to "Sentbox", "#tab_2"
+      %li
+        = link_to "Trash", "#tab_3"
+
+    #tab_1
+      %ul.content= render mailbox.inbox
+    #tab_2
+      %ul.content= render mailbox.sentbox
+    #tab_3
+      %ul.content= render mailbox.trash
+
+
 

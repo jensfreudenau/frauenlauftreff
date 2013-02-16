@@ -1,4 +1,3 @@
-
 var index = 0;
 var html;
 var marker = [];
@@ -8,7 +7,7 @@ text = {
     statusSetMarker:'Auf die Karte klicken um Marker zu setzen oder ',
     statusChangeMarker:'Auf die Karte klicken um Markerposition neu zu setzen oder ',
     withoutMarker:'ohne Marker',
-    delete: 'löschen',
+    delete:'löschen',
     onlyMarker:'nur Marker',
     setMarker:'Marker setzen',
     editMarker:'Marker bearbeiten',
@@ -20,199 +19,188 @@ text = {
     height:'Höhe',
     includeInWebsite:'In Webseite einbinden'
 }
-//marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
-//        map.addLayer(marker[intIndex] );
-//        id++;
-//        html = objValue[2]+'<br /><a >'+text.delete+'</a>';
-//        var removeId = objValue[3];
-//        var domelem = document.createElement('p');
-//        domelem.href = "#";
-//        domelem.innerHTML = html;
-//        domelem.onclick = function(e) {
-//            removeMeetingPoint(id, removeId);
-//        };
-//         marker[intIndex].bindPopup(domelem);
+
 function removeMeetingPoint(id, key) {
     $.ajax({
-          type: 'GET',
-          url: '/profiles/kill_off_photo/'+key,
-          success: function (xml) {
-              map.removeLayer(marker[id]);
-              unloadAddress(id);
-          }
+        type:'GET',
+        url:'/profiles/kill_off_photo/' + key,
+        success:function (xml) {
+            map.removeLayer(marker[id]);
+            unloadAddress(id);
+        }
     });
- }
+}
 
- function removeMarker(id) {
-     unloadAddress(id);
- }
+function removeMarker(id) {
+    unloadAddress(id);
+}
 
- function unloadAddress(id) {
-     $('#profile_meeting_points_attributes_' + id + '_lng').remove();
-     $('#profile_meeting_points_attributes_' + id + '_lat').remove();
-     $('#profile_meeting_points_attributes_' + id + '_description').remove();
-     $('#profile_meeting_points_attributes_' + id + '_id').remove();
- }
+function unloadAddress(id) {
+    $('#profile_meeting_points_attributes_' + id + '_lng').remove();
+    $('#profile_meeting_points_attributes_' + id + '_lat').remove();
+    $('#profile_meeting_points_attributes_' + id + '_description').remove();
+    $('#profile_meeting_points_attributes_' + id + '_id').remove();
+}
 
- function loadAddress(lon,lat, id) {
-     $('<input>').attr({
-         type:'hidden',
-         value:lon,
-         id:'profile_meeting_points_attributes_' + id + '_lng',
-         name:'profile[meeting_points_attributes][' + id + '][lng]'
-     }).appendTo('form');
-     $('<input>').attr({
-         type:'hidden',
-         value:lat,
-         id:'profile_meeting_points_attributes_' + id + '_lat',
-         name:'profile[meeting_points_attributes][' + id + '][lat]'
-     }).appendTo('form');
-     $('<input>').attr({
-         type:'text',
+function loadAddress(lon, lat, id) {
+    $('<input>').attr({
+        type:'hidden',
+        value:lon,
+        id:'profile_meeting_points_attributes_' + id + '_lng',
+        name:'profile[meeting_points_attributes][' + id + '][lng]'
+    }).appendTo('form');
+    $('<input>').attr({
+        type:'hidden',
+        value:lat,
+        id:'profile_meeting_points_attributes_' + id + '_lat',
+        name:'profile[meeting_points_attributes][' + id + '][lat]'
+    }).appendTo('form');
+    $('<input>').attr({
+        type:'text',
 //         value:id,
-         class: 'ginput_left',
-         id:'profile_meeting_points_attributes_' + id + '_description',
-         name:'profile[meeting_points_attributes][' + id + '][description]'
-     }).appendTo('#meeting_points');
+//         class: 'ginput_left',
+        size:'50',
+        id:'profile_meeting_points_attributes_' + id + '_description',
+        name:'profile[meeting_points_attributes][' + id + '][description]'
+    }).appendTo('#meeting_points');
 
- }
+}
 
- function my_meeting_points(arg) {
+function my_meeting_points(arg) {
 
-     var htmlMarker;
-     var id=0;
-     L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-         maxZoom:18,
-         attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
-     }).addTo(map);
+    var htmlMarker;
+    var id = 0;
+    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom:18
+    }).addTo(map);
 
-     $.each(arg, function (intIndex, objValue) {
-         marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
-         map.addLayer(marker[intIndex] );
-         id++;
-         html =  objValue[2]+'<br /><a onclick="removeMeetingPoint('+intIndex+','+objValue[3]+');">'+text.delete+'</a>';
-         marker[intIndex].bindPopup(html);
-         marker[intIndex].on('dragend', function (e) {
-             var coords = e.target._latlng;
-             var long = coords.lng;
-             var lat  = coords.lat;
-             index = intIndex;
-             $.ajax({
-                 type:"GET",
-                 url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + long,
-                 dataType:"xml",
-                 success:function (xml) {
+    $.each(arg, function (intIndex, objValue) {
+        marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
+        map.addLayer(marker[intIndex]);
+        id++;
+        html = objValue[2] + '<br /><a onclick="removeMeetingPoint(' + intIndex + ',' + objValue[3] + ');">' + text.delete + '</a>';
+        marker[intIndex].bindPopup(html);
+        marker[intIndex].on('dragend', function (e) {
+            var coords = e.target._latlng;
+            var lng = coords.lng;
+            var lat = coords.lat;
+            index = intIndex;
+            $.ajax({
+                type:"GET",
+                url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + lng,
+                dataType:"xml",
+                success:function (xml) {
 
-                     $(xml).find("addressparts").each(function () {
-                         res = $(this).find("road").text() + ", " + $(this).find("city").text();
+                    $(xml).find("addressparts").each(function () {
+                        res = $(this).find("road").text() + ", " + $(this).find("city").text();
 
-                     });
-                     $("#profile_meeting_points_attributes_"+intIndex+"_lat").val(lat);
-                     $("#profile_meeting_points_attributes_"+intIndex+"_lng").val(long);
-                     $("#profile_meeting_points_attributes_"+intIndex+"_description").val(res);
-                     htmlMarker = marker[intIndex];
+                    });
+                    $("#profile_meeting_points_attributes_" + intIndex + "_lat").val(lat);
+                    $("#profile_meeting_points_attributes_" + intIndex + "_lng").val(lng);
+                    $("#profile_meeting_points_attributes_" + intIndex + "_description").val(res);
+                    htmlMarker = marker[intIndex];
 
-                     id = intIndex;
-                     html =  res + '<br /><a onclick="removeMeetingPoint('+intIndex+','+objValue[3]+');">'+text.delete+'</a>';
-                     marker[intIndex].bindPopup(html).openPopup();
-                 },
-                 error:function (e) {
-                     console.log(e);
-                 }
-             });
-         });
-         index++;
-     });
- }
+                    id = intIndex;
+                    html = res + '<br /><a onclick="removeMeetingPoint(' + intIndex + ',' + objValue[3] + ');">' + text.delete + '</a>';
+                    marker[intIndex].bindPopup(html).openPopup();
+                },
+                error:function (e) {
+                    console.log(e);
+                }
+            });
+        });
+        index++;
+    });
+}
 
- function zoomToLonLat (lon, lat, zoom) {
-         map.setView(new L.LatLng(parseFloat(lat), parseFloat(lon)), zoom);
- }
+function zoomToLonLat(lon, lat, zoom) {
+    map.setView(new L.LatLng(parseFloat(lat), parseFloat(lon)), zoom);
+}
 
- function addMarker(e) {
+function addMarker(e) {
 
-     var long = e.latlng.lng;
-     var lat  = e.latlng.lat;
-     var marker= new L.Marker(new L.LatLng(parseFloat(lat), parseFloat(long)), {draggable:true});
+    var lng = e.latlng.lng;
+    var lat = e.latlng.lat;
+    var marker = new L.Marker(new L.LatLng(parseFloat(lat), parseFloat(lng)), {draggable:true});
 
-     map.addLayer(marker);
-     zoomToLonLat(long, lat, 13);
+    map.addLayer(marker);
+    zoomToLonLat(lng, lat, 13);
 //            var htmlMarker = marker[index];
-     $.ajax({
-         type:"GET",
-         url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + long,
-         dataType:"xml",
-         success:function (xml) {
+    $.ajax({
+        type:"GET",
+        url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + lng,
+        dataType:"xml",
+        success:function (xml) {
 
-             $(xml).find("addressparts").each(function () {
-                 res = $(this).find("road").text() + ", " + $(this).find("city").text();
+            $(xml).find("addressparts").each(function () {
+                res = $(this).find("road").text() + ", " + $(this).find("city").text();
 
-             });
-             loadAddress(long, lat, index);
-             $("#profile_meeting_points_attributes_"+index+"_description").val(res);
-             $("#profile_meeting_points_attributes_"+index+"_lat").val(lat);
-             $("#profile_meeting_points_attributes_"+index+"_lng").val(long);
-             id = index;
-             html = res+'<br /><a >'+text.delete+'</a>';
-             var domelem = document.createElement('p');
-                 domelem.href = "#";
-                 domelem.innerHTML = html;
-                 domelem.onclick = function(e) {
-                     removeMarker(id);
-                     map.removeLayer(marker);
-                 };
-             marker.bindPopup(domelem).openPopup();
-         },
-         error:function (e) {
-             console.log(e);
-         }
-     });
-     marker.on('dragend', function (e) {
-         var coords = e.target._latlng;
-         var long = coords.lng;
-         var lat  = coords.lat;
+            });
+            loadAddress(lng, lat, index);
+            $("#profile_meeting_points_attributes_" + index + "_description").val(res);
+            $("#profile_meeting_points_attributes_" + index + "_lat").val(lat);
+            $("#profile_meeting_points_attributes_" + index + "_lng").val(lng);
+            id = index;
+            html = res + '<br /><a >' + text.delete + '</a>';
+            var domelem = document.createElement('p');
+            domelem.href = "#";
+            domelem.innerHTML = html;
+            domelem.onclick = function (e) {
+                removeMarker(id);
+                map.removeLayer(marker);
+            };
+            marker.bindPopup(domelem).openPopup();
+        },
+        error:function (e) {
+            console.log(e);
+        }
+    });
+    marker.on('dragend', function (e) {
+        var coords = e.target._latlng;
+        var lng = coords.lng;
+        var lat = coords.lat;
 
-         $.ajax({
-             type:"GET",
-             url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + long,
-             dataType:"xml",
-             success:function (xml) {
-                 $(xml).find("addressparts").each(function () {
-                     res = $(this).find("road").text() + ", " + $(this).find("city").text();
-                 });
-                 $("#profile_meeting_points_attributes_"+index+"_description").val(res);
-                 $("#profile_meeting_points_attributes_"+index+"_lat").val(lat);
-                 $("#profile_meeting_points_attributes_"+index+"_lng").val(long);
-                 html = res+'<br /><a >'+text.delete+'</a>';
-                 var domelem = document.createElement('p');
-                 domelem.href = "#";
-                 domelem.innerHTML = html;
-                 domelem.onclick = function(e) {
-                     removeMarker(id);
-                     map.removeLayer(marker);
-                 };
-                 marker.bindPopup(domelem).openPopup();
-             },
-             error:function (e) {
-                 console.log(e);
-             }
-         });
-     });
-     index++;
- }
+        $.ajax({
+            type:"GET",
+            url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + lng,
+            dataType:"xml",
+            success:function (xml) {
+                $(xml).find("addressparts").each(function () {
+                    res = $(this).find("road").text() + ", " + $(this).find("city").text();
+                });
+                $("#profile_meeting_points_attributes_" + index + "_description").val(res);
+                $("#profile_meeting_points_attributes_" + index + "_lat").val(lat);
+                $("#profile_meeting_points_attributes_" + index + "_lng").val(lng);
+                html = res + '<br /><a >' + text.delete + '</a>';
+                var domelem = document.createElement('p');
+                domelem.href = "#";
+                domelem.innerHTML = html;
+                domelem.onclick = function (e) {
+                    removeMarker(id);
+                    map.removeLayer(marker);
+                };
+                marker.bindPopup(domelem).openPopup();
+            },
+            error:function (e) {
+                console.log(e);
+            }
+        });
+    });
+    index++;
+}
 
 function show_meeting_points(arg) {
 
-     var htmlMarker;
-     var id=0;
-     L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-         maxZoom:18,
-         attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
-     }).addTo(map);
+    var htmlMarker;
+    var id = 0;
+    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+        maxZoom:18,
+        attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
+    }).addTo(map);
 
-     $.each(arg, function (intIndex, objValue) {
-         marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:false});
-         map.addLayer(marker[intIndex] );
-         marker[intIndex].bindPopup(objValue[2]);
-     });
- }
+    $.each(arg, function (intIndex, objValue) {
+        marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:false});
+        map.addLayer(marker[intIndex]);
+        marker[intIndex].bindPopup(objValue[2]);
+    });
+}

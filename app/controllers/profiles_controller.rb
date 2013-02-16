@@ -1,11 +1,39 @@
 require 'open-uri'
+
 class ProfilesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /profiles
   # GET /profiles.json
   #before_filter :authenticate_user!
   def index
+    @points   = Array.new
     @profiles = Profile.where(:user_id => current_user.id)
-      respond_to do |format|
+    @user     = User.find(current_user.id)
+    @bounds = Hash.new
+
+    lng_max=lat_max=-999999
+    lng_min=lat_min=999999
+    @user.profiles.each do |v|
+      v.meeting_points.each do |val|
+        if val.lng.to_f > lng_max.to_f
+          lng_max = val.lng
+        end
+        if val.lng.to_f < lng_min.to_f
+          lng_min = val.lng
+        end
+        if val.lat.to_f > lat_max.to_f
+          lat_max = val.lat
+        end
+        if val.lat.to_f < lat_min.to_f
+          lat_min = val.lat
+        end
+
+        @points  << [ val.lng, val.lat, val.description, val.id ]
+      end
+    end
+    @bounds={:lng_max => lng_max, :lng_min=>lng_min, :lat_max=>lat_max, :lat_min=>lat_min }
+
+    respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @profiles }
     end
@@ -36,11 +64,17 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     @points = Array.new
-    @profile = Profile.find(params[:id])
-    @profile.meeting_points.each do |val|
-      @points  << [ val.lng, val.lat, val.description, val.id ]
+    @user = User.find(current_user.id)
+    #pp @user.profiles.to_a
+    @profile = Profile.where(:user_id => current_user.id).first
+    @user.profiles.each do |v|
+      v.meeting_points.each do |val|
+        @points  << [ val.lng, val.lat, val.description, val.id ]
+      end
     end
+
   end
+
   def kill_off_photo
     @meeting_point = MeetingPoint.find(params[:id])
     @meeting_point.destroy

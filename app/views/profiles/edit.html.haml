@@ -1,5 +1,8 @@
-%link{:href => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.css", :rel => "stylesheet"}/
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"}
+%link{:href => "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css", :rel => "stylesheet"}/
+%script{:src => "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"}
+= stylesheet_link_tag "MarkerCluster", "MarkerCluster.Default", "MarkerCluster.Default.ie"
+= javascript_include_tag "application"
+= javascript_include_tag 'leaflet_embed'
 :javascript
   $(document).ready(function() {
     my_meeting_points(#{@points});
