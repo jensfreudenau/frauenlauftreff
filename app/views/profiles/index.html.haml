@@ -24,7 +24,7 @@
     .map
       #map{:style => 'width: 400px; height: 300px;'}
         :javascript
-          var map = L.map('map').setView(#{@bounds[:lat_min]}, #{@bounds[:lng_max]}, 13;
+          var map = L.map('map').setView(#{@bounds[:lat_min]}, #{@bounds[:lng_max]}, 13);
           map.fitBounds([
               [#{@bounds[:lat_min]}, #{@bounds[:lng_max]}],
               [#{@bounds[:lat_max]}, #{@bounds[:lng_min]}]
