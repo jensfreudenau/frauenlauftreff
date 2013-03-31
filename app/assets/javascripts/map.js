@@ -123,7 +123,8 @@ function addMarker(e) {
     var lng = e.latlng.lng;
     var lat = e.latlng.lat;
     var marker = new L.Marker(new L.LatLng(parseFloat(lat), parseFloat(lng)), {draggable:true});
-
+//    L.Icon.Default.imagePath = 'assets/images';
+    L.Icon.Default.imagePath = "/assets"
     map.addLayer(marker);
     zoomToLonLat(lng, lat, 13);
 //            var htmlMarker = marker[index];
