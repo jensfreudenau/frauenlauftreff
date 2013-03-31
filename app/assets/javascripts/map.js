@@ -43,23 +43,24 @@ function unloadAddress(id) {
 }
 
 function loadAddress(lon, lat, id) {
+
     $('<input>').attr({
         type:'hidden',
         value:lon,
         id:'profile_meeting_points_attributes_' + id + '_lng',
         name:'profile[meeting_points_attributes][' + id + '][lng]'
     }).appendTo('form');
+
     $('<input>').attr({
         type:'hidden',
         value:lat,
         id:'profile_meeting_points_attributes_' + id + '_lat',
         name:'profile[meeting_points_attributes][' + id + '][lat]'
     }).appendTo('form');
+
     $('<input>').attr({
         type:'text',
-//         value:id,
-//         class: 'ginput_left',
-        size:'50',
+        size:'30',
         id:'profile_meeting_points_attributes_' + id + '_description',
         name:'profile[meeting_points_attributes][' + id + '][description]'
     }).appendTo('#meeting_points');

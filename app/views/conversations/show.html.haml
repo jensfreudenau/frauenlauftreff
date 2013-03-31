@@ -1,28 +1,29 @@
 #content
-  %h1.entry-title= conversation.subject
+  .mailboxer-top
+    .headline
+      %h2= conversation.subject
   %ol.comment-list
     = content_tag_for(:li, conversation.receipts_for(current_user)) do |receipt|
       - message = receipt.message
-
+      .comment-content.comment-text
+        %p= simple_format(message.body)
       .comment-meta
         %span.comment-author.vcard
           %cite.fn
             %a
-              = message.sender.email
+              = message.sender.username
         %span.published
           = localize(message.created_at, :format => :default)
-      .comment-content.comment-text
-        %p= simple_format(message.body)
+
 
   #respond
-    %h3#reply-title
-      = t("Leave a Reply")
     = form_for :message, :html=>{:id=>'commentform'}, url: [:reply, conversation] do |f|
+
+
       %p.req
-        = f.text_field :subject, class: 'text-input'
-        = f.label('message_subject', t('mailboxer.form.subject'))
-      %p.req
+
         = f.text_area :body
+        = f.label('message_body', t('mailboxer.form.body'))
       .actions
         = f.submit :submit, class: 'btn-primary button'
 

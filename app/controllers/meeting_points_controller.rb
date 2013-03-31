@@ -6,6 +6,7 @@ class MeetingPointsController < ApplicationController
     @lat    = 52.515803012883595
     @lng    = 13.376712799072266
     profile = Profile.where(:user_id => current_user.id).first
+
     unless profile.lat.nil?
       @lat = profile.lat
     end
@@ -60,6 +61,8 @@ class MeetingPointsController < ApplicationController
     @lat    = 52.515803012883595
     @lng    = 13.376712799072266
     profile = Profile.where(:user_id => current_user.id).first
+    puts '#################'
+    puts profile.firstname
     unless profile.lat.nil?
       @lat = profile.lat
     end
@@ -84,17 +87,33 @@ class MeetingPointsController < ApplicationController
   # POST /meeting_points
   # POST /meeting_points.json
   def create
-    @meeting_point = MeetingPoint.new(params[:meeting_point])
+    @meeting_point = MeetingPoint.new
+    profile = Profile.where(:user_id => current_user.id).first
 
-    respond_to do |format|
-      if @meeting_point.save
-        format.html { redirect_to @meeting_point, notice: 'Meeting point was successfully created.' }
-        format.json { render json: @meeting_point, status: :created, location: @meeting_point }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @meeting_point.errors, status: :unprocessable_entity }
-      end
+    for val in params[:meeting_point]
+        @recipients = User.first(
+                                    :joins => { :profile => :meeting_points },
+                                    :conditions => {
+                                        :meeting_points => { :id => val }
+                                    }
+
+                                )
+        @meeting_points = MeetingPoint.find(val).first
+        msg     = "Hallo #{@recipients.profile.firstname} #{@recipients.profile.lastname},\n#{profile.firstname} #{profile.lastname} m&ouml;chte sich mit dir am Treffpunkt #{@meeting_points.description} treffen."
+        subject = "Anfrage zu Treffpunkt #{@meeting_points.description}"
+        conversation  = current_user.send_message(@recipients,msg, subject).conversation
     end
+
+    #respond_to do |format|
+      #if @meeting_point.save
+      #  format.html { redirect_to }
+       redirect_to :action => "new"
+      #  format.json { render json: @meeting_point, status: :created, location: @meeting_point }
+      #else
+      #  format.html { render action: "new" }
+      #  format.json { render json: @meeting_point.errors, status: :unprocessable_entity }
+      #end
+    #end
   end
 
   # PUT /meeting_points/1

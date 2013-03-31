@@ -16,6 +16,7 @@ gem 'cancan'
 gem 'mysql2'
 gem 'mailboxer'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.

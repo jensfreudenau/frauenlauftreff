@@ -1,14 +1,15 @@
 !!!
-/[if lt IE 7] <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en">
-/[if IE 7] <html class="no-js lt-ie9 lt-ie8" lang="en">
-/[if IE 8] <html class="no-js lt-ie9" lang="en">
+/[if lt IE 7] <html class='no-js lt-ie9 lt-ie8 lt-ie7' lang='en'>
+/[if IE 7] <html class='no-js lt-ie9 lt-ie8' lang='en'>
+/[if IE 8] <html class='no-js lt-ie9' lang='en'>
 / [if gt IE 8]><!
-%html.no-js{:lang => "de"}
+%html.no-js{:lang => 'de'}
   / <![endif]
   %head
     %title Frauenlauftreff   
-    = stylesheet_link_tag "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css","application", "style", "form"
-    = javascript_include_tag "rails"
+
+    = stylesheet_link_tag 'http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css','application' #, 'layerstyle'
+    = javascript_include_tag 'rails'
   %body
     .container
       .wrap
@@ -19,37 +20,37 @@
             #site-description
               %span Frauenlauftreff
           #sidebar-header.sidebar
-            %a.logo.fleft{:href => "/"}
-              %img{:alt => "Frauenlauftreff", :src => "/assets/team.jpg"}
+            %a.logo.fleft{:href => '/'}
+              %img{:alt => 'Frauenlauftreff', :src => '/assets/team.jpg'}
           #menu-primary.menu-container
             .menu
               %ul#menu-primary-items
                 %li.menu-item
-                  %a(href="/") Home
+                  %a(href='/') Home
                 - if user_signed_in?
-                  %li{ :class => (params[:controller] == "meeting_point" ? "active" : nil) }
-                    = link_to t("meeting_point"), new_meeting_point_path
-                  %li{ :class => (params[:controller] == "profiles" ? "active" : nil) }
-                    = link_to t("profile"), profiles_path
-                  %li{ :class => (params[:controller] == "conversations" ? "active" : nil) }
+                  %li{ :class => (params[:controller] == 'meeting_point' ? 'active' : nil) }
+                    = link_to t('meeting_point'), new_meeting_point_path
+                  %li{ :class => (params[:controller] == 'profiles' ? 'active' : nil) }
+                    = link_to t('profile'), profiles_path
+                  %li{ :class => (params[:controller] == 'conversations' ? 'active' : nil) }
 
-                    = link_to conversations_path(:box => 'inbox'), {:class => " sf-with-ul"} do
-                      = t("conversation")
+                    = link_to conversations_path(:box => 'inbox'), {:class => ' sf-with-ul'} do
+                      = t('conversation')
                       %span.sf-sub-indicator
                         »
 
                     %ul.sub-menu
                       -if current_user.mailbox.inbox({:read => false}).count.to_i > 0
-                        %li= link_to t("mailboxer.inbox"), conversations_path(:box => 'inbox') , {:class => " sf-with-ul red"}
+                        %li= link_to t('mailboxer.inbox'), conversations_path(:box => 'inbox') , {:class => ' sf-with-ul red'}
                       - else
-                        %li= link_to t("mailboxer.inbox"), conversations_path(:box => 'inbox') , {:class => " sf-with-ul"}
-                      %li= link_to t("mailboxer.sentbox"), conversations_path(:box => 'sentbox') , {:class => " sf-with-ul"}
+                        %li= link_to t('mailboxer.inbox'), conversations_path(:box => 'inbox') , {:class => ' sf-with-ul'}
+                      %li= link_to t('mailboxer.sentbox'), conversations_path(:box => 'sentbox') , {:class => ' sf-with-ul'}
 
                   %li
-                    = link_to t("logout", :default => "Logout"), destroy_user_session_path, :method => :delete
+                    = link_to t('logout', :default => 'Logout'), destroy_user_session_path, :method => :delete
                 - else
                   %li
-                    = link_to t("login", :default => "Login"), new_user_session_path
+                    = link_to t('login', :default => 'Login'), new_user_session_path
         %p#notice= notice
         %p#alert= alert
         .main
@@ -63,14 +64,14 @@
               .menu
                 %ul#menu-subsidiary-items
                   %li
-                    %a{:href => "#"} RSS
+                    %a{:href => '#'} RSS
                   %li
-                    %a{:href => "#"} Facebook
+                    %a{:href => '#'} Facebook
                   %li
-                    %a{:href => "#"} Twitter
+                    %a{:href => '#'} Twitter
                   %li
-                    %a{:href => "#"} Google+
+                    %a{:href => '#'} Google+
                   %li
-                    %a{:href => "#"} Flickr
+                    %a{:href => '#'} Flickr
 
 

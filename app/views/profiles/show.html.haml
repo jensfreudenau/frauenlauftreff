@@ -7,7 +7,16 @@
 %p
   %b= t("editing.max_distance")
   = @profile.distance
-
+%p
+  %b= t("editing.tageszeit")
+  = t("zw")
+  = @profile.start_time
+  = t("und")
+  = @profile.end_time
+  = t("Uhr")
+%p
+  %b= t("editing.description")
+  = @profile.description
 
 = link_to t("edit"), edit_profile_path(@profile)
 \|

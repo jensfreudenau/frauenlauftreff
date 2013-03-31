@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121207150739) do
+ActiveRecord::Schema.define(:version => 20130330163103) do
 
   create_table "conversations", :force => true do |t|
     t.string   "subject",    :default => ""
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(:version => 20121207150739) do
     t.integer  "sender_id"
     t.string   "sender_type"
     t.integer  "conversation_id"
+    t.integer  "meeting_point_id"
     t.boolean  "draft",                :default => false
     t.datetime "updated_at",                              :null => false
     t.datetime "created_at",                              :null => false
@@ -65,6 +66,8 @@ ActiveRecord::Schema.define(:version => 20121207150739) do
     t.string   "city"
     t.string   "lat"
     t.string   "lng"
+    t.time     "start_time"
+    t.time     "end_time"
   end
 
   create_table "receipts", :force => true do |t|
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(:version => 20121207150739) do
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
+    t.string   "username123#"
     t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -112,6 +116,7 @@ ActiveRecord::Schema.define(:version => 20121207150739) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "time_zone"
+    t.string   "username"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

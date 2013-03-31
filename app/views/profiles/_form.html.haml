@@ -1,23 +1,19 @@
--#= form_for(@user, :html => { :id=>"gform_2"} ) do |user_form|
-  -#= user_form.text_field :username
-
-= form_for(@profile, :html => { :id=>'gform_2'} ) do |profile_form|
-  -#= profile_form.user.text_field :username
-  #map{:style => 'width: 600px; height: 400px;float:left;'}
-    :javascript
-      var map = L.map('map').setView([52.527377321443, 13.414247631488], 13);
-      map.on('click', addMarker);
-  .aside
-    #meeting_points
-      = profile_form.fields_for :meeting_points do |mpf|
-        .meeting_points_description
-          = mpf.text_field :description, :size =>"30"
+= form_for(@profile, :html => { :id=>'profile_form'} ) do |profile_form|
+  .map_meeting_points
+    #map{:style => 'width: 600px; height: 400px;float:left;'}
+      :javascript
+        var map = L.map('map').setView([52.527377321443, 13.414247631488], 13);
+        map.on('click', addMarker);
+    .aside
+      #meeting_points
+        = profile_form.fields_for :meeting_points do |mpf|
+          = mpf.text_field :description
           = mpf.hidden_field :lat
           = mpf.hidden_field :lng
-  .gform_body
-    %ul#gform_fields_2.gform_fields
-      %li.gfield.gsection
-        %h2.gsection_title
+  .form_body
+    %ul
+      %li
+        %h2
           Personal Details
 
       - if @profile.errors.any?
@@ -26,37 +22,45 @@
           %ul
             - @profile.errors.full_messages.each do |msg|
               %li= msg
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('firstname', t('editing.firstname'), :class=>"gfield_label")
-          = profile_form.text_field :firstname, :class =>"ginput_left"
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('lastname', t('editing.lastname'), :class=>"gfield_label")
-          = profile_form.text_field :lastname, :class =>"ginput_left"
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('city', t('editing.city'), :class=>"gfield_label")
-          = profile_form.text_field :city, :class =>"ginput_left"
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('min_avg', t('editing.min_pace'), :class=>"gfield_label")
-          = profile_form.text_field :min_avg, :class =>"ginput_left"
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('max_avg', t('editing.max_pace'), :class=>"gfield_label")
-          = profile_form.text_field :max_avg, :class =>"ginput_left"
+      %li
 
-      %li.gfield.gfield_contains_required
-        .ginput_complex.ginput_container
-          = profile_form.label('distance',t("editing.max_distance"), :class=>"gfield_label")
-          = profile_form.text_field :distance, :class =>"ginput_left"
+        = profile_form.label('firstname', t('editing.firstname'))
+        = profile_form.text_field :firstname
+      %li
 
-        = profile_form.hidden_field :id
+        = profile_form.label('lastname', t('editing.lastname'))
+        = profile_form.text_field :lastname
+      %li
 
+        = profile_form.label('city', t('editing.city'))
+        = profile_form.text_field :city
+      %li
+
+        = profile_form.label('min_avg', t('editing.min_pace'))
+        = profile_form.text_field :min_avg
+      %li
+
+        = profile_form.label('max_avg', t('editing.max_pace'))
+        = profile_form.text_field :max_avg
+
+      %li
+
+        = profile_form.label('distance',t('editing.max_distance'))
+        = profile_form.text_field :distance
+      %li
+        %label
+          =t('daytime_i_want_run')
+        %br
+        = profile_form.label('start_time', t('editing.start_time'))
+        = profile_form.text_field :start_time
+      %li
+
+        = profile_form.label('end_time', t('editing.end_time'))
+        = profile_form.text_field :end_time
+      = profile_form.hidden_field :id
 
     .actions
-      = profile_form.submit t('save'), :class=>"button gform_button"
+      = profile_form.submit t('save'), :class=>'button'
 
 
 

@@ -1,18 +1,18 @@
-%link{:href => "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css", :rel => "stylesheet"}/
-%script{:src => "http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"}
-= stylesheet_link_tag "MarkerCluster", "MarkerCluster.Default", "MarkerCluster.Default.ie"
-= javascript_include_tag "application"
-= javascript_include_tag 'leaflet_embed'
+= javascript_include_tag 'application'
+= stylesheet_link_tag 'jquery.ui.timepicker'
+= javascript_include_tag 'jquery.ui.timepicker', 'custom'
+
 :javascript
   $(document).ready(function() {
     my_meeting_points(#{@points});
+
+
   });
 
 %h1.page-title.entry-title
   = t("profile")
 .entry-content
-  #gform_wrapper_2.gf_browser_chrome.gform_wrapper
-    = render 'form'
+  = render 'form'
 
 
 

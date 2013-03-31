@@ -1,3 +1,10 @@
+/*
+ *= require jquery.ui.core
+ *= require jquery.ui.theme
+ *= require jquery.ui.datepicker
+
+ */
+
 /**
  * Theme Name: Oxygen
  * Theme URI: http://alienwp.com/themes/oxygen/
@@ -12,7 +19,9 @@
  */
 
 /* Normalize
+
 -------------------------------------------------------------- */
+
 article, aside, details, figcaption, figure, footer, header, hgroup, nav, section { display: block; }
 audio, canvas, video {
 	display: inline-block;
@@ -468,39 +477,7 @@ input[type="submit"]:hover { cursor: pointer }
 	float: left;
 	width: 100%;
 }
-.singular-attachment .hentry .gallery-caption { display: none; /* Hide captions in gallery on attachment pages */ }
-.gallery-caption { margin: 3px 0 0 0 }
-.col-0 { width: 100% }
-.col-1 { width: 100% }
-.col-2 { width: 50% }
-.col-3 { width: 33.33% }
-.col-4 { width: 25% }
-.col-5 { width: 20% }
-.col-6 { width: 16.66% }
-.col-7 { width: 14.28% }
-.col-8 { width: 12.5% }
-.col-9 { width: 11.11% }
-.col-10 { width: 10% }
-.col-11 { width: 9.09% }
-.col-12 { width: 8.33% }
-.col-13 { width: 7.69% }
-.col-14 { width: 7.14% }
-.col-15 { width: 6.66% }
-.col-16 { width: 6.25% }
-.col-17 { width: 5.88% }
-.col-18 { width: 5.55% }
-.col-19 { width: 5.26% }
-.col-20 { width: 5% }
-.col-21 { width: 4.76% }
-.col-22 { width: 4.54% }
-.col-23 { width: 4.34% }
-.col-24 { width: 4.16% }
-.col-25 { width: 4% }
-.col-26 { width: 3.84% }
-.col-27 { width: 3.7% }
-.col-28 { width: 3.57% }
-.col-29 { width: 3.44% }
-.col-30 { width: 3.33% }
+
 
 /* Layout
 -------------------------------------------------------------- */
@@ -523,7 +500,6 @@ input[type="submit"]:hover { cursor: pointer }
 }
 .aside {
 	float: right;
-    padding-top: 8px;
 	width: 27%;	/* 160 / 940 = 0.1702127659574468 */
 }
 #sidebar-primary {
@@ -781,107 +757,7 @@ input[type="submit"]:hover { cursor: pointer }
 }
 #menu-secondary .menu li li .sf-sub-indicator { right: 5px; }
 
-/*  Featured Content (slider)
--------------------------------------------------------------- */
-.featured-wrapper {
-	float: right;
-	margin-bottom: 30px;
-	width: 79.78723404255319%;	/* 750 / 940 = 0.79787234042553 */
-	overflow: hidden;
-	position: relative;
-	z-index: 1;
-}
-#featured-content {
-	position: relative;
-	margin-bottom: 20px;
-}
-.featured-post {
-	position: relative;
-	overflow: hidden;
-	float: left;
-}
-.featured-post h2.entry-title a {
-	position: absolute;
-	bottom: 110px;
-	right: 0;
-	color: #111;
-	background: #fff;
-	padding: .4em 30px .4em 1.5em;
-	font-size: 1em;
-	text-transform: uppercase;
-}
-.featured-post:hover h2.entry-title a, .featured-post:hover .byline {
-	color: #fff;
-	background: #111;
-}
-.featured-post .byline {
-	position: absolute;
-	bottom: 82px;
-	right: 0;
-	color: #999;
-	background: #fff;
-	padding: .4em 30px .4em 1.3em;
-	font-size: 0.9166666666666667em;
-}
-.featured-post a:hover { border-bottom: none; }
-.featured-thumbnail { max-width: 100%; }
-#featured-content .dummy {
-	width: 100% !important;
-	height: auto !important;
-	max-width: 100%;
-	height: auto;
-}
-.no-js #featured-content .dummy, #featured-content .dummy.hidden { display: none; }
-.slider-nav {
-	display: block;
-	position: absolute;
-	bottom: 0;
-	width: 31px;
-	height: 28px;
-	background: #111 url(/assets/slider-nav-arrows.png) no-repeat;
-	background: rgba(0,0,0,.5) url(/assets/slider-nav-arrows.png) no-repeat;
-	color: #fff;
-	font-size: 1em;
-	z-index: 9;
-	cursor: pointer;
-	text-indent: -9999em;
-}
-#slider-prev {
-	left: 0;
-	background-position: 7px -21px;
-}
-#slider-next {
-	right: 0;
-	background-position: 7px 11px;
-}
-.slider-nav:hover { background-color: #000; }
 
-/*  Featured Content (slider) Navigation
--------------------------------------------------------------- */
-#slider-nav {
-	position: relative;
-	width: 100%;
-	overflow: hidden;
-	padding: 0;
-	margin: 0;
-}
-#slide-thumbs {
-	width: 100%;
-	margin: 0;
-}
-#slider-nav li {
-	float: left;
-	list-style: none;
-	width: 14.66666666666667%;	/* 110 / 750 = 0.1466666666666667 */
-	margin: 0 2.4% 0 0px;	/* 18 / 750 = 0.024 */
-}
-#slider-nav li a, #slider-nav li a:visited {
-	border-bottom: none;
-	padding: 0;
-}
-#slider-nav li.last { margin-right: 0; }
-#slider-nav li img { max-width: 100%; }
-.activeSlide img { opacity: .3; }
 
 /* Home
 -------------------------------------------------------------- */
@@ -1168,8 +1044,10 @@ input[type="submit"]:hover { cursor: pointer }
 }
 .comment-list { margin-bottom: 40px; }
 .comment-list li {
-	padding: 20px 0 0 0;
+	padding: 0;
 	border-top: none;
+    padding-left: 15px;
+    border-bottom: 1px solid #0da4d3;
 }
 .comment-list li li { padding-left: 11.70212765957447%; }	/* 55px / 470px = 0.1170212765957447 */
 .comment-list .avatar {
@@ -1204,7 +1082,7 @@ input[type="submit"]:hover { cursor: pointer }
 	color: #888;
 	background: #f3f3f3;
 }
-.comment-content { margin-left: 55px; }
+
 .comment-content p { margin-bottom: 1em; }
 
 /* Comment form
@@ -1350,41 +1228,9 @@ input[type="submit"]:hover { cursor: pointer }
 	padding-left: 0;
 	margin-bottom: 15px;
 }
-.wordpress .gform_wrapper input[type="text"], .wordpress .gform_wrapper input[type="url"], .wordpress .gform_wrapper input[type="email"], .wordpress .gform_wrapper input[type="phone"], .wordpress .gform_wrapper input[type="number"], .wordpress .gform_wrapper input[type="password"], .wordpress .gform_wrapper textarea {
-	padding: 4px;
-	font-size: 1em;
-}
-.wordpress .gform_wrapper .gform_footer, .wordpress .gform_wrapper .gform_footer.right_label, .wordpress .gform_wrapper .gform_footer.left_label {
-	padding-top: 0;
-	margin-top: 0;
-}
-.wordpress .gform_wrapper .gform_footer.right_label, .wordpress .gform_wrapper .gform_footer.left_label { padding-left: 31.5%; }
-.wordpress .gform_wrapper .top_label .gfield_label {
-	font-weight: normal;
-	margin: 0 0 5px;
-}
-.wordpress .gform_wrapper .ginput_complex .ginput_full input { width: 92% !important; }
-.wordpress .gform_wrapper .field_name_first input, .wordpress .gform_wrapper .ginput_complex .ginput_left input { width: 83.7% !important; }
-.wordpress .gform_wrapper .ginput_complex .ginput_right input, .wordpress .gform_wrapper .ginput_complex .ginput_right select { width: 83.7% !important; }
-.wordpress .gform_wrapper select {
-	padding: 2px;
-	height: 2em;
-	font-size: 1em;
-}
-.wordpress .gform_wrapper .gsection {
-	border-bottom: 1px solid #e9e9e9;
-	margin: 40px 0 20px 0 !important;
-}
+
 .gform_wrapper .gfield_description, .gform_wrapper div.charleft { color: #aaa !important; }
 .gform_wrapper .description, .gform_wrapper .gfield_description, .gform_wrapper .gsection_description, .gform_wrapper .instruction, .gform_wrapper div.charleft { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !important; }
-
-/*  Contact Form 7 (plugin)
------------------------------------------------------ */
-.wpcf7-form p {
-	margin-bottom: 15px;
-	line-height: 2.2em;
-}
-.wpcf7-form input[type="text"], .wpcf7-form input[type="password"], .wpcf7-form input[type="email"], .wpcf7-form textarea, .wpcf7-form select { padding: 6px; }
 
 /*  Media Queries (mobile browsing)
 ----------------------------------------------------- */
@@ -1474,10 +1320,8 @@ input[type="submit"]:hover { cursor: pointer }
 }
 
 #map {
-    margin-top: 30px;
     width: 700px;
     height: 400px;
-
 }
 .olPopupCloseBox {
   background: url("/assets/cross.png") no-repeat;
@@ -1539,6 +1383,26 @@ table.inboxsentbox th, table.inboxsentbox td {
     float:left;
 }
 .profile .map {
-
     width:300px;
+}
+.headline {
+    float:left;
+    padding-right: 30px;
+}
+.headline_link{
+    padding-top: 10px;
+}
+
+.profile .form_body {
+    float:left;
+}
+.map_meeting_points {
+    float: right;
+    width: 100%;
+}
+.main {
+    margin-bottom: 20px;
+}
+.aside  input{
+    margin-top: 10px;
 }

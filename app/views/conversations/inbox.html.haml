@@ -1,7 +1,9 @@
 #content
   .mailboxer-top
-    %h2= t("mailboxer.inbox")
-    = link_to t('start_conversation'), :new_conversation
+    .headline
+      %h2= t("mailboxer.inbox")
+    .headline_link
+      = link_to t('start_conversation'), :new_conversation
   %table.inboxsentbox
     %th
       = t('mailboxer.form.subject')

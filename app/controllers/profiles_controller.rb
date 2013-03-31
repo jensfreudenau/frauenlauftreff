@@ -13,8 +13,7 @@ class ProfilesController < ApplicationController
 
     lng_max=lat_max=-999999
     lng_min=lat_min=999999
-    @user.profiles.each do |v|
-      v.meeting_points.each do |val|
+      @user.profile.meeting_points.each do |val|
         if val.lng.to_f > lng_max.to_f
           lng_max = val.lng
         end
@@ -30,7 +29,6 @@ class ProfilesController < ApplicationController
 
         @points  << [ val.lng, val.lat, val.description, val.id ]
       end
-    end
     @bounds={:lng_max => lng_max, :lng_min=>lng_min, :lat_max=>lat_max, :lat_min=>lat_min }
 
     respond_to do |format|
@@ -65,14 +63,10 @@ class ProfilesController < ApplicationController
   def edit
     @points = Array.new
     @user = User.find(current_user.id)
-    #pp @user.profiles.to_a
     @profile = Profile.where(:user_id => current_user.id).first
-    @user.profiles.each do |v|
-      v.meeting_points.each do |val|
+    @user.profile.meeting_points.each do |val|
         @points  << [ val.lng, val.lat, val.description, val.id ]
       end
-    end
-
   end
 
   def kill_off_photo
@@ -116,7 +110,7 @@ class ProfilesController < ApplicationController
         params[:profile][:lng] = @lng
       end
       if @profile.update_attributes(params[:profile])
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to profiles_url, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }

@@ -1,11 +1,13 @@
 de:
   mailboxer:
+    leave_a_reply: "Schreibe eine Nachricht"
     form:
       recipients: "Empfänger"
       subject: "Betreff"
-      body: "Text"
+      body: "Nachricht"
       from: "von"
     send: "abschicken"
+    invite: "Einladung verschicken"
     inbox: "Posteingang"
     sentbox: "Gesendet"
 
@@ -51,6 +53,7 @@ de:
   sign_up: "registriere dich"
   sign_in: "einloggen"
   send: "abschicken"
+  invite: "Einladung verschicken"
   cancel: "abbrechen"
   forgot_your_password: "Passwort vergessen?"
   resend_confirmation_instructions: "Noch mal die Bestätigung schicken"
@@ -82,6 +85,8 @@ de:
     min_pace: "min. Geschwindigkeit"
     max_pace: "max. Geschwindigkeit"
     description: "Beschreibung"
+    start_time: Startzeit
+    end_time: Endzeit
     save: "speichern"
   courses: "Strecken"
   delete: "löschen"
@@ -91,6 +96,10 @@ de:
   list: "Alle"
   new: "Neu"
   profile: "Dein Profil"
+  zw: "zwischen"
+  und: "und"
+  Uhr: "Uhr"
+  daytime_i_want_run: "Tageszeit wann ich laufen möchte:"
   conversation: "Nachrichten"
   all_courses: "Alle Strecken"
   all_trainings: "Training"
