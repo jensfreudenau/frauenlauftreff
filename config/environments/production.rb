@@ -73,7 +73,7 @@ Frauenlauftreff::Application.configure do
   config.action_mailer.smtp_settings = {
   :address              => "smtp.gmail.com",
   :port                 => 587,
-  :domain: "frauenlauftreff.herokuapp.com",
+  :domain               => "frauenlauftreff.herokuapp.com",
   :user_name            => "berlinscrolling@gmail.com",
   :password             => "jensBerl#n",
   :authentication       => "plain",
