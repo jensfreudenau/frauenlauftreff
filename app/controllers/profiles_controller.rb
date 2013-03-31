@@ -9,26 +9,27 @@ class ProfilesController < ApplicationController
     @points   = Array.new
     @profiles = Profile.where(:user_id => current_user.id)
     @user     = User.find(current_user.id)
-    @bounds = Hash.new
+    @bounds   = Hash.new
 
     lng_max=lat_max=-999999
     lng_min=lat_min=999999
-      @user.profile.meeting_points.each do |val|
-        if val.lng.to_f > lng_max.to_f
-          lng_max = val.lng
-        end
-        if val.lng.to_f < lng_min.to_f
-          lng_min = val.lng
-        end
-        if val.lat.to_f > lat_max.to_f
-          lat_max = val.lat
-        end
-        if val.lat.to_f < lat_min.to_f
-          lat_min = val.lat
-        end
-
-        @points  << [ val.lng, val.lat, val.description, val.id ]
+    @anzahl = @user.profile.meeting_points.count
+    @user.profile.meeting_points.each do |val|
+      if val.lng.to_f > lng_max.to_f
+        lng_max = val.lng
       end
+      if val.lng.to_f < lng_min.to_f
+        lng_min = val.lng
+      end
+      if val.lat.to_f > lat_max.to_f
+        lat_max = val.lat
+      end
+      if val.lat.to_f < lat_min.to_f
+        lat_min = val.lat
+      end
+
+      @points  << [ val.lng, val.lat, val.description, val.id ]
+    end
     @bounds={:lng_max => lng_max, :lng_min=>lng_min, :lat_max=>lat_max, :lat_min=>lat_min }
 
     respond_to do |format|
