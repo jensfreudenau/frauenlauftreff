@@ -1,3 +1,4 @@
+require "smtp_tls"
 Frauenlauftreff::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
@@ -77,8 +78,7 @@ Frauenlauftreff::Application.configure do
   :user_name            => "berlinscrolling@gmail.com",
   :password             => "jensBerl#n",
   :authentication       => "plain",
-  #:enable_starttls_auto => true,
-  :enable_starttls_auto => false,
+  :enable_starttls_auto => true,
   :openssl_verify_mode  => 'none'
 }
 
