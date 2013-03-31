@@ -77,7 +77,8 @@ Frauenlauftreff::Application.configure do
   :user_name            => "berlinscrolling@gmail.com",
   :password             => "jensBerl#n",
   :authentication       => "plain",
-  :enable_starttls_auto => true,
+  #:enable_starttls_auto => true,
+  :enable_starttls_auto => false,
   :openssl_verify_mode  => 'none'
 }
 
