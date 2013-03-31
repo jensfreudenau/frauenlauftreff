@@ -74,7 +74,7 @@ function my_meeting_points(arg) {
     L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
         maxZoom:18
     }).addTo(map);
-
+    L.Icon.Default.imagePath = "/assets"
     $.each(arg, function (intIndex, objValue) {
         marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
         map.addLayer(marker[intIndex]);
