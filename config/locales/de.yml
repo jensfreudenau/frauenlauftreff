@@ -80,7 +80,7 @@ de:
   map: "Karte"
   create trainings route: "Trainingsroute anlegen"
   reply: "antworten"
-  profile_map_description: "Klicke in die karte, um deine Treffpunkte zu bestimmen."
+  profile_map_description: "Klicke in die Karte, um deine Treffpunkte zu bestimmen."
   editing:
     username: "Benutzername"
     firstname: "Vorname"
