@@ -28,7 +28,7 @@ class ProfilesController < ApplicationController
         lat_min = val.lat
       end
 
-      @points  << [ val.lng, val.lat, val.description, val.id ]
+      @points  << [ val.lng.to_s, val.lat.to_s, val.description, val.id ]
     end
     @bounds={:lng_max => lng_max, :lng_min=>lng_min, :lat_max=>lat_max, :lat_min=>lat_min }
 

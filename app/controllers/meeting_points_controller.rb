@@ -8,10 +8,10 @@ class MeetingPointsController < ApplicationController
     profile = Profile.where(:user_id => current_user.id).first
 
     unless profile.lat.nil?
-      @lat = profile.lat
+      @lat = profile.lat.to_s
     end
     unless profile.lng.nil?
-      @lng = profile.lng
+      @lng = profile.lng.to_s
     end
 
     @points         = Array.new
