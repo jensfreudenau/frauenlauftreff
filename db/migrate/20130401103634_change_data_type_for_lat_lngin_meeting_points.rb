@@ -3,8 +3,8 @@ class ChangeDataTypeForLatLnginMeetingPoints < ActiveRecord::Migration
     remove_column :meeting_points, :lat
     remove_column :meeting_points, :lng
 
-    add_column :lat, :decimal, {:precision=>10, :scale=>6}
-    add_column :lng, :decimal, {:precision=>10, :scale=>6}
+    add_column :meeting_points, :lat, :decimal, {:precision=>10, :scale=>6}
+    add_column :meeting_points, :lng, :decimal, {:precision=>10, :scale=>6}
 
   end
 
