@@ -23,28 +23,21 @@
             - @profile.errors.full_messages.each do |msg|
               %li= msg
       %li
-
         = profile_form.label('firstname', t('editing.firstname'))
         = profile_form.text_field :firstname
       %li
-
         = profile_form.label('lastname', t('editing.lastname'))
         = profile_form.text_field :lastname
       %li
-
         = profile_form.label('city', t('editing.city'))
         = profile_form.text_field :city
       %li
-
         = profile_form.label('min_avg', t('editing.min_pace'))
         = profile_form.text_field :min_avg
       %li
-
         = profile_form.label('max_avg', t('editing.max_pace'))
         = profile_form.text_field :max_avg
-
       %li
-
         = profile_form.label('distance',t('editing.max_distance'))
         = profile_form.text_field :distance
       %li
@@ -54,9 +47,11 @@
         = profile_form.label('start_time', t('editing.start_time'))
         = profile_form.text_field :start_time
       %li
-
         = profile_form.label('end_time', t('editing.end_time'))
         = profile_form.text_field :end_time
+      %li
+        = profile_form.label('description', t('editing.description'))
+        = profile_form.text_area :description
       = profile_form.hidden_field :id
 
     .actions

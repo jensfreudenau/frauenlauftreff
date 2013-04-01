@@ -11,7 +11,7 @@ function askForPlots() {
     var minll=bounds.getSouthWest();
     var maxll=bounds.getNorthEast();
     $("#descriptions").empty();
-    var checkboxes='<div="input_container"><ul>';
+    var checkboxes='<div id="input_container"><ul>';
     L.Icon.Default.imagePath = "/assets"
     $.ajax({
         type: 'GET',
@@ -26,7 +26,7 @@ function askForPlots() {
                 var title = objValue[2];
                 meeting_point_ids[intIndex] = objValue[3];
                 checkboxes+='<li><input type="checkbox" name="meeting_point['+objValue[3]+']" id="meeting_point['+objValue[3]+']" value="'+objValue[3]+'"></input>';
-                checkboxes+='<label for="meeting_point['+objValue[3]+']">'+objValue[2]+' / '+objValue[5]+'</label></li>';
+                checkboxes+='<label for="meeting_point['+objValue[3]+']">'+objValue[2]+' /<br /> '+objValue[5]+'</label></li>';
                 var marker = new L.Marker(new L.LatLng(objValue[1], objValue[0]), { title: title });
                 marker.bindPopup(title);
                 markers.addLayer(marker);

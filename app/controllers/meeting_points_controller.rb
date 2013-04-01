@@ -32,10 +32,10 @@ class MeetingPointsController < ApplicationController
 
     @meeting_points = MeetingPoint.map_points_wo_own_profile(args)
     @meeting_points.each do |val|
-      user = User.where(:id => val.profile.user_id).all
+      profile = Profile.where(:id => val.profile.user_id).all
       username = Array.new
-      user.each do |u|
-        username << u.username
+      profile.each do |u|
+        username << u.firstname + ' ' + u.lastname
       end
       @points  << [ val.lng, val.lat, val.description, val.id, val.profile.user_id, username.first]
     end
@@ -61,8 +61,7 @@ class MeetingPointsController < ApplicationController
     @lat    = 52.515803012883595
     @lng    = 13.376712799072266
     profile = Profile.where(:user_id => current_user.id).first
-    puts '#################'
-    puts profile.firstname
+
     unless profile.lat.nil?
       @lat = profile.lat
     end

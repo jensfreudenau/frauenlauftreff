@@ -66,7 +66,7 @@ class ProfilesController < ApplicationController
     @user = User.find(current_user.id)
     @profile = Profile.where(:user_id => current_user.id).first
     @user.profile.meeting_points.each do |val|
-        @points  << [ val.lng, val.lat, val.description, val.id ]
+        @points  << [ val.lng.to_s, val.lat.to_s, val.description, val.id ]
       end
   end
 

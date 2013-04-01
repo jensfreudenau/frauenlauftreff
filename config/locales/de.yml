@@ -10,7 +10,8 @@ de:
     invite: "Einladung verschicken"
     inbox: "Posteingang"
     sentbox: "Gesendet"
-
+    message_mailer:
+      subject_new: "Neue Nachricht"
   errors:
     messages:
       not_found: "Nicht gefunden"
@@ -80,6 +81,9 @@ de:
   create trainings route: "Trainingsroute anlegen"
   reply: "antworten"
   editing:
+    username: "Benutzername"
+    firstname: "Vorname"
+    lastname: "Nachname"
     profile: "Profil bearbeiten"
     max_distance: "max. Lauflänge"
     min_pace: "min. Geschwindigkeit"
