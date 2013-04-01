@@ -1,14 +1,14 @@
 .grid.col-one-half.mq2-col-full
   %h2
-    = t("Change your password")
+    = t('helpers.label.user.change_password')
   = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f|
     = devise_error_messages!
     = f.hidden_field :reset_password_token
     %div
-      = f.label :password, "New password"
-      = f.password_field :password, :required => "", :class => "required password", :minlength => "6"
+      = f.label :password, t('helpers.label.user.new_password')
+      = f.password_field :password, :required => "", :class => 'required password', :minlength => '6'
     %div
-      = f.label :password_confirmation, "Confirm new password"
+      = f.label :password_confirmation, t('helpers.label.user.password_confirmation')
       = f.password_field :password_confirmation, :required => ""
-    %div= f.submit
+    %div= f.submit t('send'), :class=>'button'
   = render "devise/shared/links"

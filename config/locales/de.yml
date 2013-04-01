@@ -292,8 +292,10 @@ de:
          user:
            remember_me: "erinnere dich an mich"
            password: "Passwort"
+           new_password: "neues Passwort"
            password_confirmation: "Passwort bestätigen"
            email: "EMail"
+           change_password: "ändere dein Passwort"
     submit:
       user:
         create: "abschicken"
