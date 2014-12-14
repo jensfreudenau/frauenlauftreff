@@ -38,11 +38,10 @@
                       = t('conversation')
                       %span.sf-sub-indicator
                         »
-
                     %ul.sub-menu
-                      -if current_user.mailbox.inbox({:read => false}).count.to_i > 0
+                      -#-if current_user.mailbox.inbox({:read => false}).count.to_i > 0
                         %li= link_to t('mailboxer.inbox'), conversations_path(:box => 'inbox') , {:class => ' sf-with-ul red'}
-                      - else
+                      -#- else
                         %li= link_to t('mailboxer.inbox'), conversations_path(:box => 'inbox') , {:class => ' sf-with-ul'}
                       %li= link_to t('mailboxer.sentbox'), conversations_path(:box => 'sentbox') , {:class => ' sf-with-ul'}
 

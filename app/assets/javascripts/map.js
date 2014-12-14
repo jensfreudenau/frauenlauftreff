@@ -71,11 +71,16 @@ function my_meeting_points(arg) {
 
     var htmlMarker;
     var id = 0;
-    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-        maxZoom:18
+//    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+//        maxZoom:18
+//    }).addTo(map);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        maxZoom:18,
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
+
     L.Icon.Default.imagePath = "/assets"
-    $.each(arg, function (intIndex, objValue) {
+    jQuery.each(arg, function (intIndex, objValue) {
         marker[intIndex] = L.marker([objValue[1], objValue[0]], {draggable:true});
         map.addLayer(marker[intIndex]);
         id++;
@@ -86,19 +91,19 @@ function my_meeting_points(arg) {
             var lng = coords.lng;
             var lat = coords.lat;
             index = intIndex;
-            $.ajax({
+            jQuery.ajax({
                 type:"GET",
                 url:"http://nominatim.openstreetmap.org/reverse?format=xml&zoom=18&addressdetails=1&lat=" + lat + "&lon=" + lng,
                 dataType:"xml",
                 success:function (xml) {
 
-                    $(xml).find("addressparts").each(function () {
-                        res = $(this).find("road").text() + ", " + $(this).find("city").text();
+                    jQuery(xml).find("addressparts").each(function () {
+                        res = jQuery(this).find("road").text() + ", " + $(this).find("city").text();
 
                     });
-                    $("#profile_meeting_points_attributes_" + intIndex + "_lat").val(lat);
-                    $("#profile_meeting_points_attributes_" + intIndex + "_lng").val(lng);
-                    $("#profile_meeting_points_attributes_" + intIndex + "_description").val(res);
+                    jQuery("#profile_meeting_points_attributes_" + intIndex + "_lat").val(lat);
+                    jQuery("#profile_meeting_points_attributes_" + intIndex + "_lng").val(lng);
+                    jQuery("#profile_meeting_points_attributes_" + intIndex + "_description").val(res);
                     htmlMarker = marker[intIndex];
 
                     id = intIndex;
@@ -195,9 +200,12 @@ function show_meeting_points(arg) {
 
     var htmlMarker;
     var id = 0;
-    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
-        maxZoom:18,
-        attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
+//    L.tileLayer('http://{s}.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/997/256/{z}/{x}/{y}.png', {
+//        maxZoom:18,
+//        attribution:'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery <a href="http://cloudmade.com">CloudMade</a>'
+//    }).addTo(map);
+    L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
     $.each(arg, function (intIndex, objValue) {

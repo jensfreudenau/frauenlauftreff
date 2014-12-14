@@ -12,5 +12,12 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
-OpenLayers.ImgPath = "/assets" ;
+//= require jquery.ui.all
+//= require leaflet
+//= require leaflet.markercluster
+//= require leaflet_embed
+//= require map
+//= require OpenLayers
+
+
+OpenLayers.ImgPath = "/assets/images" ;

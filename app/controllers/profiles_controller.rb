@@ -4,7 +4,6 @@ class ProfilesController < ApplicationController
   before_filter :authenticate_user!
   # GET /profiles
   # GET /profiles.json
-  #before_filter :authenticate_user!
   def index
     @points   = Array.new
     @profiles = Profile.where(:user_id => current_user.id)
@@ -110,7 +109,7 @@ class ProfilesController < ApplicationController
         params[:profile][:lat] = @lat
         params[:profile][:lng] = @lng
       end
-      if @profile.update_attributes(params[:profile])
+      if @profile.update(profile_params)
         format.html { redirect_to profiles_url, notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
@@ -134,6 +133,10 @@ class ProfilesController < ApplicationController
   end
 
   private
+
+  def profile_params
+    params.require(:profile).permit(:lastname, :firstname, :city, :min_avg, :max_avg, :distance, :start_time, :end_time, :description, meeting_points_attributes: [:id, :description, :lat, :lng])
+  end
 
   def load_latlong_by_city(city)
     doc = fetch "http://nominatim.openstreetmap.org/search?format=xml&q=" + city.gsub(' ', ',').to_s

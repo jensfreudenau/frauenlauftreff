@@ -6,9 +6,10 @@ Frauenlauftreff::Application.routes.draw do
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
-  root :to => "homes#index"
+  root :to => 'homes#index'
   resources :profiles
   resources :messages
+  #resources :user, :controller => 'user'
   resources :meeting_points do
     get :map_points, :on => :collection
   end
@@ -19,7 +20,14 @@ Frauenlauftreff::Application.routes.draw do
       get :kill_off_photo
     end
   end
-  match '/profiles/kill_off_photo/:id', :to => 'profiles#kill_off_photo'
+  devise_scope :user do
+    get "sign_in", to: "devise/sessions#new"
+  end
+  # devise_scope :user do
+  #   get '/signin' => 'devise/sessions#new'
+  #   get '/logout' => 'devise/sessions#destroy'
+  # end
+
   resources :conversations, :only=> [:index, :show, :new, :create] do
       member do
         post :reply

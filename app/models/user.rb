@@ -3,15 +3,18 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
 
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable, :token_authenticatable
+  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable, :confirmable, :lockable
+  devise :database_authenticatable, :recoverable, :rememberable, :trackable, :validatable #, :token_authenticatable
   has_one :profile
   after_create :create_profile
+
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email,:username, :password, :password_confirmation, :remember_me
+  #attr_accessible :email, :username, :password, :password_confirmation, :remember_me
 
   #mailboxer gem
   acts_as_messageable
+
+
 
   def name
     email
@@ -22,10 +25,10 @@ class User < ActiveRecord::Base
   end
 
   def self.build(opts = {})
-      u = User.new(opts)
-      u.setup(opts)
-      u
-    end
+    u = User.new(opts)
+    u.setup(opts)
+    u
+  end
 
   def setup(opts)
 
@@ -37,8 +40,10 @@ class User < ActiveRecord::Base
   end
 
   def create_profile
-    profile = Profile.new
+    profile         = Profile.new
     profile.user_id = self.id
     profile.save
   end
+
+
 end
