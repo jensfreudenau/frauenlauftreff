@@ -27,7 +27,7 @@ gem 'jquery-ui-rails'
 #gem 'meta_search'
 
 gem 'mailboxer'
-
+gem 'sprockets_better_errors'
 gem 'pg'
 # Gems used only for assets and not required
 # in production environments by default.
