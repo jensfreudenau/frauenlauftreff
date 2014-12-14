@@ -9,7 +9,7 @@ Frauenlauftreff::Application.configure do
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
-  config.serve_static_assets = false
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS
   config.assets.compress = true
@@ -80,5 +80,28 @@ Frauenlauftreff::Application.configure do
   :enable_starttls_auto => true,
   :openssl_verify_mode  => 'none'
 }
+
+  # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
+  # the I18n.default_locale when a translation can not be found).
+  config.i18n.fallbacks = true
+
+  # Send deprecation notices to registered listeners.
+  config.active_support.deprecation = :notify
+
+  # Disable automatic flushing of the log to improve performance.
+  # config.autoflush_log = false
+
+  # Use default logging formatter so that PID and timestamp are not suppressed.
+  config.log_formatter = ::Logger::Formatter.new
+
+  # Compress JavaScripts and CSS
+  config.assets.compress = true
+
+# Don't fallback to assets pipeline if a precompiled asset is missed
+  config.assets.compile = true
+
+# Generate digests for assets URLs
+  config.assets.digest = true
+
 
 end

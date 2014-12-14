@@ -60,6 +60,8 @@ module Frauenlauftreff
     config.assets.enabled = true
     config.assets.version = '1.0'
     config.serve_static_assets = true
+    config.assets.initialize_on_precompile = true
+    config.serve_static_assets = false
     # Version of your assets, change this if you want to expire all your assets
     # config.assets.version = '1.0'
     # config.generators do |g|
